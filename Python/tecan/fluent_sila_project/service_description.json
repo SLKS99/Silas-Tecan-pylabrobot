@@ -1,0 +1,13 @@
+{
+  "service_name" : "SilaFluentController",
+  "service_description": "This is a python client for Fluent",
+  "authors"      : "Clemens Klein",
+  "creation_date" : "06.11.2019",
+  "version" : "0.1.0",
+  "vendor_url" : "tecan.com",
+  "SiLA_standard_feature_list" : ["SilaFluentController"],
+  "SiLA_feature_list" : ["SilaFluentController"],
+  "communication_port" : "50051",
+  "IP_address" : "127.0.0.1",
+  "hostname" : "localhost"
+}
