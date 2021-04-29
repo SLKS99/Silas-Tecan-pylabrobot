@@ -4,9 +4,8 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Contracts;
 
-namespace Implementation
+namespace Tecan.VisionX.Sila2
 {
     [Export(typeof(ISimulationController))]
     [PartCreationPolicy(CreationPolicy.Shared)]

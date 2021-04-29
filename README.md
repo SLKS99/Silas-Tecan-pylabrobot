@@ -4,6 +4,8 @@
 This repository contains a console application that exports the functionality of the FluentControl API as SiLA2 Server. 
 This allows to call into the FluentControl API using other programming languages by means of a SiLA2 client. For convenience, the repository also already contains a ready-made Python client.
 
+**The code in this repository can be used free of charge, but Tecan does not give warranties. For details, please consult the License description.**
+
 ## Requirements
 This project references the FluentControl API from its default install location and therefore, FluentControl needs to be installed in order to build the SiLA2 connector. All other dependencies can be downloaded from package managers.
 
@@ -68,4 +70,3 @@ If you see an issue please feel free to file a bug on the project [list of issue
 
 ## License
 This code is licensed under the [New BSD License](https://choosealicense.com/licenses/bsd-3-clause/)
->>>>>>> 4eec93d (Refined readme and upload server build)

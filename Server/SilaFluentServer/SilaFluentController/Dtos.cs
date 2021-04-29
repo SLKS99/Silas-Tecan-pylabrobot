@@ -8,15 +8,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Contracts;
+using Tecan.VisionX.Sila2;
 
-namespace SilaFluentController
+namespace Tecan.VisionX.Sila2
 {
     using Tecan.Sila2;
     
     
     ///  <summary>
-    /// Data transfer object for the request of the AddLabware command
+    /// Data transfer object for the request of the Add Labware command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class AddLabwareRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -47,14 +47,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="barcode"></param>
-        ///  <param name="hasLid"></param>
-        ///  <param name="labwareName"></param>
-        ///  <param name="labwareType"></param>
-        ///  <param name="targetLocation"></param>
-        ///  <param name="position"></param>
-        ///  <param name="rotation"></param>
-        public AddLabwareRequestDto(string barcode, bool hasLid, string labwareName, string labwareType, string targetLocation, int position, int rotation, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="barcode">the barcode of the labware</param>
+        ///  <param name="hasLid">True, if the labware has a lid</param>
+        ///  <param name="labwareName">the name of the labware</param>
+        ///  <param name="labwareType">the type of the labware</param>
+        ///  <param name="targetLocation">the location where the labware should be spawned</param>
+        ///  <param name="position">the position in the target location group</param>
+        ///  <param name="rotation">the rotation of the labware</param>
+        public AddLabwareRequestDto(string barcode, bool hasLid, string labwareName, string labwareType, string targetLocation, int position, int rotation, Tecan.Sila2.IBinaryStore store)
         {
             Barcode = new Tecan.Sila2.StringDto(barcode, store);
             HasLid = new Tecan.Sila2.BooleanDto(hasLid, store);
@@ -66,6 +66,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the barcode of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto Barcode
@@ -81,6 +82,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// True, if the labware has a lid
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.BooleanDto HasLid
@@ -96,6 +98,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the name of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(3)]
         public Tecan.Sila2.StringDto LabwareName
@@ -111,6 +114,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the type of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(4)]
         public Tecan.Sila2.StringDto LabwareType
@@ -126,6 +130,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the location where the labware should be spawned
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(5)]
         public Tecan.Sila2.StringDto TargetLocation
@@ -141,6 +146,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the position in the target location group
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(6)]
         public Tecan.Sila2.IntegerDto Position
@@ -156,6 +162,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the rotation of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(7)]
         public Tecan.Sila2.IntegerDto Rotation
@@ -193,7 +200,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the RemoveLabware command
+    /// Data transfer object for the request of the Remove Labware command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class RemoveLabwareRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -212,13 +219,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="labwareName"></param>
-        public RemoveLabwareRequestDto(string labwareName, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="labwareName">the name of the labware</param>
+        public RemoveLabwareRequestDto(string labwareName, Tecan.Sila2.IBinaryStore store)
         {
             LabwareName = new Tecan.Sila2.StringDto(labwareName, store);
         }
         
         ///  <summary>
+        /// the name of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto LabwareName
@@ -256,7 +264,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the SetLocation command
+    /// Data transfer object for the request of the Set Location command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class SetLocationRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -281,11 +289,11 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="labware"></param>
-        ///  <param name="rotation"></param>
-        ///  <param name="targetLocation"></param>
-        ///  <param name="targetSite"></param>
-        public SetLocationRequestDto(string labware, int rotation, string targetLocation, int targetSite, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="labware">the name of the labware</param>
+        ///  <param name="rotation">the new rotation of the labware</param>
+        ///  <param name="targetLocation">the target location group name</param>
+        ///  <param name="targetSite">the target site</param>
+        public SetLocationRequestDto(string labware, int rotation, string targetLocation, int targetSite, Tecan.Sila2.IBinaryStore store)
         {
             Labware = new Tecan.Sila2.StringDto(labware, store);
             Rotation = new Tecan.Sila2.IntegerDto(rotation, store);
@@ -294,6 +302,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the name of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto Labware
@@ -309,6 +318,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the new rotation of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.IntegerDto Rotation
@@ -324,6 +334,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the target location group name
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(3)]
         public Tecan.Sila2.StringDto TargetLocation
@@ -339,6 +350,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the target site
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(4)]
         public Tecan.Sila2.IntegerDto TargetSite
@@ -395,13 +407,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="subroutineName"></param>
-        public SubroutineRequestDto(string subroutineName, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="subroutineName">the name of the subroutine</param>
+        public SubroutineRequestDto(string subroutineName, Tecan.Sila2.IBinaryStore store)
         {
             SubroutineName = new Tecan.Sila2.StringDto(subroutineName, store);
         }
         
         ///  <summary>
+        /// the name of the subroutine
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto SubroutineName
@@ -439,7 +452,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the TransferLabware command
+    /// Data transfer object for the request of the Transfer Labware command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class TransferLabwareRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -464,11 +477,11 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="labwareToLocation"></param>
-        ///  <param name="onlyUseSelectedSite"></param>
-        ///  <param name="targetLocation"></param>
-        ///  <param name="targetPosition"></param>
-        public TransferLabwareRequestDto(string labwareToLocation, bool onlyUseSelectedSite, string targetLocation, int targetPosition, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="labwareToLocation">the labware that should be moved</param>
+        ///  <param name="onlyUseSelectedSite">True, if the instrument should only use the exact target position, otherwise False</param>
+        ///  <param name="targetLocation">the target location group</param>
+        ///  <param name="targetPosition">the target position</param>
+        public TransferLabwareRequestDto(string labwareToLocation, bool onlyUseSelectedSite, string targetLocation, int targetPosition, Tecan.Sila2.IBinaryStore store)
         {
             LabwareToLocation = new Tecan.Sila2.StringDto(labwareToLocation, store);
             OnlyUseSelectedSite = new Tecan.Sila2.BooleanDto(onlyUseSelectedSite, store);
@@ -477,6 +490,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the labware that should be moved
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto LabwareToLocation
@@ -492,6 +506,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// True, if the instrument should only use the exact target position, otherwise False
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.BooleanDto OnlyUseSelectedSite
@@ -507,6 +522,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the target location group
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(3)]
         public Tecan.Sila2.StringDto TargetLocation
@@ -522,6 +538,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the target position
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(4)]
         public Tecan.Sila2.IntegerDto TargetPosition
@@ -559,7 +576,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the TransferLabwareBackToBase command
+    /// Data transfer object for the request of the Transfer Labware Back To Base command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class TransferLabwareBackToBaseRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -578,13 +595,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="labwareName"></param>
-        public TransferLabwareBackToBaseRequestDto(string labwareName, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="labwareName">the name of the labware</param>
+        public TransferLabwareBackToBaseRequestDto(string labwareName, Tecan.Sila2.IBinaryStore store)
         {
             LabwareName = new Tecan.Sila2.StringDto(labwareName, store);
         }
         
         ///  <summary>
+        /// the name of the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto LabwareName
@@ -622,7 +640,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the GenericCommand command
+    /// Data transfer object for the request of the Generic Command command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GenericCommandRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -641,13 +659,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="content"></param>
-        public GenericCommandRequestDto(string content, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="content">the XML representation of the command</param>
+        public GenericCommandRequestDto(string content, Tecan.Sila2.IBinaryStore store)
         {
             Content = new Tecan.Sila2.StringDto(content, store);
         }
         
         ///  <summary>
+        /// the XML representation of the command
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto Content
@@ -685,7 +704,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the GetFingers command
+    /// Data transfer object for the request of the Get Fingers command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetFingersRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -706,15 +725,16 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="deviceAlias"></param>
-        ///  <param name="gripperFingers"></param>
-        public GetFingersRequestDto(string deviceAlias, string gripperFingers, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="deviceAlias">the alias of the RGA</param>
+        ///  <param name="gripperFingers">the gripper fingers</param>
+        public GetFingersRequestDto(string deviceAlias, string gripperFingers, Tecan.Sila2.IBinaryStore store)
         {
             DeviceAlias = new Tecan.Sila2.StringDto(deviceAlias, store);
             GripperFingers = new Tecan.Sila2.StringDto(gripperFingers, store);
         }
         
         ///  <summary>
+        /// the alias of the RGA
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto DeviceAlias
@@ -730,6 +750,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the gripper fingers
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.StringDto GripperFingers
@@ -767,7 +788,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the DropFingers command
+    /// Data transfer object for the request of the Drop Fingers command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class DropFingersRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -788,15 +809,16 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="deviceAlias"></param>
-        ///  <param name="dockingStation"></param>
-        public DropFingersRequestDto(string deviceAlias, string dockingStation, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="deviceAlias">the alias of the RGA</param>
+        ///  <param name="dockingStation">the docking station</param>
+        public DropFingersRequestDto(string deviceAlias, string dockingStation, Tecan.Sila2.IBinaryStore store)
         {
             DeviceAlias = new Tecan.Sila2.StringDto(deviceAlias, store);
             DockingStation = new Tecan.Sila2.StringDto(dockingStation, store);
         }
         
         ///  <summary>
+        /// the alias of the RGA
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto DeviceAlias
@@ -812,6 +834,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the docking station
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.StringDto DockingStation
@@ -849,7 +872,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the UserPrompt command
+    /// Data transfer object for the request of the User Prompt command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class UserPromptRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -868,13 +891,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="text"></param>
-        public UserPromptRequestDto(string text, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="text">the text to display to the user</param>
+        public UserPromptRequestDto(string text, Tecan.Sila2.IBinaryStore store)
         {
             Text = new Tecan.Sila2.StringDto(text, store);
         }
         
         ///  <summary>
+        /// the text to display to the user
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto Text
@@ -912,7 +936,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the GetTips command
+    /// Data transfer object for the request of the Get Tips command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetTipsRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -935,10 +959,10 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="airgapVolume"></param>
-        ///  <param name="airgapSpeed"></param>
-        ///  <param name="diTiType"></param>
-        public GetTipsRequestDto(int airgapVolume, int airgapSpeed, string diTiType, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="airgapVolume">the airgap volume</param>
+        ///  <param name="airgapSpeed">the airgap speed</param>
+        ///  <param name="diTiType">the type of disposable tips</param>
+        public GetTipsRequestDto(int airgapVolume, int airgapSpeed, string diTiType, Tecan.Sila2.IBinaryStore store)
         {
             AirgapVolume = new Tecan.Sila2.IntegerDto(airgapVolume, store);
             AirgapSpeed = new Tecan.Sila2.IntegerDto(airgapSpeed, store);
@@ -946,6 +970,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the airgap volume
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.IntegerDto AirgapVolume
@@ -961,6 +986,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the airgap speed
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.IntegerDto AirgapSpeed
@@ -976,6 +1002,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the type of disposable tips
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(3)]
         public Tecan.Sila2.StringDto DiTiType
@@ -1038,11 +1065,11 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="volume"></param>
-        ///  <param name="labware"></param>
-        ///  <param name="liquidClass"></param>
-        ///  <param name="wellOffset"></param>
-        public AspirateRequestDto(int volume, string labware, string liquidClass, int wellOffset, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="volume">the volume that should be aspirated</param>
+        ///  <param name="labware">the labware from which should be aspirated</param>
+        ///  <param name="liquidClass">the name of the liquid class used for aspiration</param>
+        ///  <param name="wellOffset">the well offset</param>
+        public AspirateRequestDto(int volume, string labware, string liquidClass, int wellOffset, Tecan.Sila2.IBinaryStore store)
         {
             Volume = new Tecan.Sila2.IntegerDto(volume, store);
             Labware = new Tecan.Sila2.StringDto(labware, store);
@@ -1051,6 +1078,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the volume that should be aspirated
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.IntegerDto Volume
@@ -1066,6 +1094,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the labware from which should be aspirated
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.StringDto Labware
@@ -1081,6 +1110,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the name of the liquid class used for aspiration
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(3)]
         public Tecan.Sila2.StringDto LiquidClass
@@ -1096,6 +1126,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the well offset
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(4)]
         public Tecan.Sila2.IntegerDto WellOffset
@@ -1158,11 +1189,11 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="volume"></param>
-        ///  <param name="labware"></param>
-        ///  <param name="liquidClass"></param>
-        ///  <param name="wellOffset"></param>
-        public DispenseRequestDto(int volume, string labware, string liquidClass, int wellOffset, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="volume">the volume that should be dispensed</param>
+        ///  <param name="labware">the labware that should be dispensed into</param>
+        ///  <param name="liquidClass">the name of the liquid class used for dispensing</param>
+        ///  <param name="wellOffset">the well offset</param>
+        public DispenseRequestDto(int volume, string labware, string liquidClass, int wellOffset, Tecan.Sila2.IBinaryStore store)
         {
             Volume = new Tecan.Sila2.IntegerDto(volume, store);
             Labware = new Tecan.Sila2.StringDto(labware, store);
@@ -1171,6 +1202,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the volume that should be dispensed
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.IntegerDto Volume
@@ -1186,6 +1218,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the labware that should be dispensed into
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.StringDto Labware
@@ -1201,6 +1234,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the name of the liquid class used for dispensing
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(3)]
         public Tecan.Sila2.StringDto LiquidClass
@@ -1216,6 +1250,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the well offset
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(4)]
         public Tecan.Sila2.IntegerDto WellOffset
@@ -1253,7 +1288,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the DropTips command
+    /// Data transfer object for the request of the Drop Tips command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class DropTipsRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1272,13 +1307,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="labware"></param>
-        public DropTipsRequestDto(string labware, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="labware">the labware</param>
+        public DropTipsRequestDto(string labware, Tecan.Sila2.IBinaryStore store)
         {
             Labware = new Tecan.Sila2.StringDto(labware, store);
         }
         
         ///  <summary>
+        /// the labware
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto Labware
@@ -1316,7 +1352,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the StartFluentOrAttach command
+    /// Data transfer object for the request of the Start Fluent Or Attach command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class StartFluentOrAttachRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1333,7 +1369,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public StartFluentOrAttachRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public StartFluentOrAttachRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1360,7 +1396,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the StartFluentAndLogin command
+    /// Data transfer object for the request of the Start Fluent And Login command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class StartFluentAndLoginRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1383,7 +1419,7 @@ namespace SilaFluentController
         /// <param name="store">An object to organize binaries.</param>
         ///  <param name="username"></param>
         ///  <param name="password"></param>
-        public StartFluentAndLoginRequestDto(string username, string password, Tecan.Sila2.Binary.IBinaryStore store)
+        public StartFluentAndLoginRequestDto(string username, string password, Tecan.Sila2.IBinaryStore store)
         {
             Username = new Tecan.Sila2.StringDto(username, store);
             Password = new Tecan.Sila2.StringDto(password, store);
@@ -1442,7 +1478,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the StartFluentInSimulationMode command
+    /// Data transfer object for the request of the Start Fluent In Simulation Mode command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class StartFluentInSimulationModeRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1459,7 +1495,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public StartFluentInSimulationModeRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public StartFluentInSimulationModeRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1486,7 +1522,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the PrepareMethod command
+    /// Data transfer object for the request of the Prepare Method command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class PrepareMethodRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1505,13 +1541,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="toPrepare"></param>
-        public PrepareMethodRequestDto(string toPrepare, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="toPrepare">the name of the method to prepare</param>
+        public PrepareMethodRequestDto(string toPrepare, Tecan.Sila2.IBinaryStore store)
         {
             ToPrepare = new Tecan.Sila2.StringDto(toPrepare, store);
         }
         
         ///  <summary>
+        /// the name of the method to prepare
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto ToPrepare
@@ -1549,7 +1586,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the RunMethod command
+    /// Data transfer object for the request of the Run Method command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class RunMethodRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1566,7 +1603,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public RunMethodRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public RunMethodRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1593,7 +1630,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the PauseRun command
+    /// Data transfer object for the request of the Pause Run command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class PauseRunRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1610,7 +1647,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public PauseRunRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public PauseRunRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1637,7 +1674,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the ResumeRun command
+    /// Data transfer object for the request of the Resume Run command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class ResumeRunRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1654,7 +1691,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public ResumeRunRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public ResumeRunRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1681,7 +1718,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the StopMethod command
+    /// Data transfer object for the request of the Stop Method command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class StopMethodRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1698,7 +1735,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public StopMethodRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public StopMethodRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1725,7 +1762,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the FinishExecution command
+    /// Data transfer object for the request of the Finish Execution command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class FinishExecutionRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1742,7 +1779,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public FinishExecutionRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public FinishExecutionRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1769,7 +1806,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the CloseMethod command
+    /// Data transfer object for the request of the Close Method command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class CloseMethodRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1786,7 +1823,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public CloseMethodRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public CloseMethodRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1813,7 +1850,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the SetVariableValue command
+    /// Data transfer object for the request of the Set Variable Value command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class SetVariableValueRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1834,15 +1871,16 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="variableName"></param>
-        ///  <param name="value"></param>
-        public SetVariableValueRequestDto(string variableName, string value, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="variableName">the name of the variable</param>
+        ///  <param name="value">the new value of the variable</param>
+        public SetVariableValueRequestDto(string variableName, string value, Tecan.Sila2.IBinaryStore store)
         {
             VariableName = new Tecan.Sila2.StringDto(variableName, store);
             Value = new Tecan.Sila2.StringDto(value, store);
         }
         
         ///  <summary>
+        /// the name of the variable
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto VariableName
@@ -1858,6 +1896,7 @@ namespace SilaFluentController
         }
         
         ///  <summary>
+        /// the new value of the variable
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(2)]
         public Tecan.Sila2.StringDto Value
@@ -1895,7 +1934,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the GetVariableNames command
+    /// Data transfer object for the request of the Get Variable Names command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetVariableNamesRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -1912,7 +1951,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public GetVariableNamesRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public GetVariableNamesRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -1939,7 +1978,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the response of the GetVariableNames command
+    /// Data transfer object for the response of the Get Variable Names command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetVariableNamesResponseDto : Tecan.Sila2.ISilaTransferObject
@@ -1958,13 +1997,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="returnValue"></param>
-        public GetVariableNamesResponseDto(System.Collections.Generic.ICollection<string> returnValue, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="returnValue">A collection of variable names</param>
+        public GetVariableNamesResponseDto(System.Collections.Generic.ICollection<string> returnValue, Tecan.Sila2.IBinaryStore store)
         {
             ReturnValue = Tecan.Sila2.DtoExtensions.Encapsulate(returnValue, Tecan.Sila2.StringDto.Create, store);
         }
         
         ///  <summary>
+        /// A collection of variable names
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public System.Collections.Generic.List<Tecan.Sila2.StringDto> ReturnValue
@@ -1990,7 +2030,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the GetVariableValue command
+    /// Data transfer object for the request of the Get Variable Value command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetVariableValueRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -2009,13 +2049,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="variableName"></param>
-        public GetVariableValueRequestDto(string variableName, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="variableName">the name of the variable</param>
+        public GetVariableValueRequestDto(string variableName, Tecan.Sila2.IBinaryStore store)
         {
             VariableName = new Tecan.Sila2.StringDto(variableName, store);
         }
         
         ///  <summary>
+        /// the name of the variable
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto VariableName
@@ -2053,7 +2094,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the response of the GetVariableValue command
+    /// Data transfer object for the response of the Get Variable Value command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetVariableValueResponseDto : Tecan.Sila2.ISilaTransferObject
@@ -2072,13 +2113,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="returnValue"></param>
-        public GetVariableValueResponseDto(string returnValue, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="returnValue">the current value of this variable</param>
+        public GetVariableValueResponseDto(string returnValue, Tecan.Sila2.IBinaryStore store)
         {
             ReturnValue = new Tecan.Sila2.StringDto(returnValue, store);
         }
         
         ///  <summary>
+        /// the current value of this variable
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.StringDto ReturnValue
@@ -2104,7 +2146,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the request of the GetAllRunnableMethods command
+    /// Data transfer object for the request of the Get All Runnable Methods command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetAllRunnableMethodsRequestDto : Tecan.Sila2.ISilaTransferObject, Tecan.Sila2.ISilaRequestObject
@@ -2121,7 +2163,7 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public GetAllRunnableMethodsRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public GetAllRunnableMethodsRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -2148,7 +2190,7 @@ namespace SilaFluentController
     }
     
     ///  <summary>
-    /// Data transfer object for the response of the GetAllRunnableMethods command
+    /// Data transfer object for the response of the Get All Runnable Methods command
     /// </summary>
     [ProtoBuf.ProtoContractAttribute()]
     public class GetAllRunnableMethodsResponseDto : Tecan.Sila2.ISilaTransferObject
@@ -2167,13 +2209,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="returnValue"></param>
-        public GetAllRunnableMethodsResponseDto(System.Collections.Generic.ICollection<string> returnValue, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="returnValue">a collection of runnable methods</param>
+        public GetAllRunnableMethodsResponseDto(System.Collections.Generic.ICollection<string> returnValue, Tecan.Sila2.IBinaryStore store)
         {
             ReturnValue = Tecan.Sila2.DtoExtensions.Encapsulate(returnValue, Tecan.Sila2.StringDto.Create, store);
         }
         
         ///  <summary>
+        /// a collection of runnable methods
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public System.Collections.Generic.List<Tecan.Sila2.StringDto> ReturnValue
@@ -2218,13 +2261,14 @@ namespace SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        ///  <param name="timeout"></param>
-        public ShutdownRequestDto(int timeout, Tecan.Sila2.Binary.IBinaryStore store)
+        ///  <param name="timeout">a timeout in seconds</param>
+        public ShutdownRequestDto(int timeout, Tecan.Sila2.IBinaryStore store)
         {
             Timeout = new Tecan.Sila2.IntegerDto(timeout, store);
         }
         
         ///  <summary>
+        /// a timeout in seconds
         /// </summary>
         [ProtoBuf.ProtoMemberAttribute(1)]
         public Tecan.Sila2.IntegerDto Timeout

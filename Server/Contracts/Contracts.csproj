@@ -7,8 +7,8 @@
     <ProjectGuid>{1057D5DA-CFD2-4AE9-99F4-5069D66F6B5A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tecan.Sila2.Fluent.Contracts</RootNamespace>
-    <AssemblyName>Tecan.Sila2.Fluent.Contracts</AssemblyName>
+    <RootNamespace>Tecan.VisionX.Sila2</RootNamespace>
+    <AssemblyName>Tecan.VisionX.Sila2.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -18,19 +18,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Build\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
-    <DocumentationFile>bin\Debug\Tecan.Sila2.Fluent.Contracts.xml</DocumentationFile>
+    <DocumentationFile>..\Build\Tecan.VisionX.Sila2.Contracts.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Build\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Build\Tecan.VisionX.Sila2.Contracts.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -69,8 +70,8 @@
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
-    <Reference Include="Tecan.Sila2.Contracts, Version=2.0.72.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Contracts.2.0.72-master\lib\netstandard2.0\Tecan.Sila2.Contracts.dll</HintPath>
+    <Reference Include="Tecan.Sila2.Annotations, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tecan.Sila2.Annotations.3.3.0\lib\netstandard2.0\Tecan.Sila2.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.VisionX.API.V2">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Tecan\FluentControl\Tecan.VisionX.API.V2.dll</HintPath>

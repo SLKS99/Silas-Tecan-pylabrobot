@@ -2,9 +2,9 @@
 using System.Reflection;
 using Tecan.Sila2.Server;
 
-namespace SilaFluentServer
+namespace Tecan.VisionX.Sila2
 {
-    class grpcProgram
+    class Program
     {
         static void Main(string[] args)
         {

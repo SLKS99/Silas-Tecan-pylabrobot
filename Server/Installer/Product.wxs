@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="SilaFluentServer" Language="1033" Version="1.0.0.0" Manufacturer="Tecan" UpgradeCode="5FDF7B65-B65C-4080-AF07-ACCE84FBBFAC">
+  <Product Id="*" Name="SilaFluentServer" Language="1033" Version="1.0.1.0" Manufacturer="Tecan" UpgradeCode="5FDF7B65-B65C-4080-AF07-ACCE84FBBFAC">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -14,164 +14,25 @@
           <Directory Id="DesktopFolder"/> 
         </Directory>
       </Directory>
-
-   
   
       <Component Id="SilaFluentServer" Guid="9159E169-DC99-4252-A421-073FAE80C3F2" Directory="Files">
          <File Source="$(var.SilaFluentServer.TargetDir)SilaFluentServer.exe" KeyPath="yes" Name="SilaFluentServer.exe" />
          <Shortcut Id="Desktopshortcut" Directory="DesktopFolder" Name="SilaFluentServer" Advertise="yes" />
          <Shortcut Id="Shortcut" Directory="INSTALLFOLDER" Name="SilaFluentServer" Advertise="yes"/>
-       </Component>
+       </Component>  
 
-
-    <ComponentGroup Id="pdb" Directory="Files">
-      <Component Id ="SilaFluentServer.pdb" Guid="4FFC1C8D-81A1-4991-89DB-0C2BF260C764">
-        <File Source="$(var.SilaFluentServer.TargetDir)SilaFluentServer.pdb"/>
-      </Component>
-      <Component Id ="SilaFluentController.pdb" Guid="6FDDD258-8C32-4611-B12D-9FFBC16E192D">
-        <File Source="$(var.SilaFluentServer.TargetDir)SilaFluentController.pdb"/>
-      </Component>
-      <Component Id ="Microsoft.Build.pdb" Guid="5BA9F401-FA41-4FC6-A662-83634B323999">
-        <File Source="$(var.SilaFluentServer.TargetDir)Microsoft.Build.pdb"/>
-      </Component>
-      <Component Id ="Microsoft.Build.Framework.pdb" Guid="E7893EF8-E2E6-44F8-B9EF-F587AD9B3DEB">
-        <File Source="$(var.SilaFluentServer.TargetDir)Microsoft.Build.Framework.pdb"/>
-      </Component>
-      <Component Id ="Makaretu.Dns.pdb" Guid="A68DE9A1-0246-4501-97FE-CFBEE29E22A2">
-        <File Source="$(var.SilaFluentServer.TargetDir)Makaretu.Dns.pdb"/>
-      </Component>
-      <Component Id ="Grpc.Core.pdb" Guid="F24F3AE5-06BA-442F-889A-184BEAA5E4B4">
-        <File Source="$(var.SilaFluentServer.TargetDir)Grpc.Core.pdb"/>
-      </Component>
-      <Component Id ="Grpc.Core.Api.pdb" Guid="9E195741-6B8E-4A33-9BD2-0FE12AAA6E6D">
-        <File Source="$(var.SilaFluentServer.TargetDir)Grpc.Core.Api.pdb"/>
-      </Component>
-      <Component Id ="Contracts.pdb" Guid="E6EC142B-75EF-4C08-B8E2-6C55420813E7">
-        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Fluent.Contracts.pdb"/>
-      </Component>
-      <Component Id ="Common.Logging.pdb" Guid="BC796075-E10D-48C5-8459-0E520E257358">
-        <File Source="$(var.SilaFluentServer.TargetDir)Common.Logging.pdb"/>
-      </Component>
-      <Component Id ="Common.Logging.Core.pdb" Guid="FFC377F7-0A6D-4A0B-8F8B-D0C3F3C7A081">
-        <File Source="$(var.SilaFluentServer.TargetDir)Common.Logging.Core.pdb"/>
-      </Component>
-    </ComponentGroup>
-
-    <ComponentGroup Id="dylib" Directory="Files">
-      <Component Id ="libgrpc_csharp_ext.x86.dylib" Guid="2AE4469E-FA56-49D3-A440-3F69B99832CE">
-        <File Source="$(var.SilaFluentServer.TargetDir)libgrpc_csharp_ext.x86.dylib"/>
-      </Component>
-      <Component Id ="libgrpc_csharp_ext.x64.dylib" Guid="190D6EB2-1C74-43FA-94D1-6603D9B78051">
-        <File Source="$(var.SilaFluentServer.TargetDir)libgrpc_csharp_ext.x64.dylib"/>
-      </Component>
-    </ComponentGroup>
-
-    <ComponentGroup Id="so" Directory="Files">
-      <Component Id ="libgrpc_csharp_ext.x86.so" Guid="DD13F181-6086-4D95-A54E-B476B71B932D">
-        <File Source="$(var.SilaFluentServer.TargetDir)libgrpc_csharp_ext.x86.so"/>
-      </Component>
-      <Component Id ="libgrpc_csharp_ext.x64.so" Guid="C78DB807-E83E-4D69-88D6-A14A65070647">
-        <File Source="$(var.SilaFluentServer.TargetDir)libgrpc_csharp_ext.x64.so"/>
-      </Component>
-    </ComponentGroup>
-    
-
-      <ComponentGroup Id ="config" Directory="Files">      
-        <Component Id ="Contracts.dll.config" Guid="60C8B69F-4AAB-4ACB-A277-DAD3F1303EC5">
-          <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Fluent.Contracts.dll.config"/>
-        </Component>
-        <Component Id ="SilaFluentController.dll.config" Guid="ED05A185-3339-4835-BC95-91E91B33E056">
-          <File Source="$(var.SilaFluentServer.TargetDir)SilaFluentController.dll.config"/>
-        </Component>
+      <ComponentGroup Id ="config" Directory="Files">  
         <Component Id ="SilaFluentServer.exe.config" Guid="AFA5EC40-8752-4744-9A5D-4BEC5591476C">
           <File Source="$(var.SilaFluentServer.TargetDir)SilaFluentServer.exe.config"/>
         </Component>     
       </ComponentGroup>
 
-    <ComponentGroup Id ="xml" Directory="Files">
-      <Component Id ="Tecan.Sila2.xml" Guid="1C52AA00-0F7B-4094-BC3D-FCDBECC61294">
-        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.xml"/> 
-      </Component>
-      <Component Id ="Tecan.Sila2.Server.xml" Guid="11ECE7F2-E028-42B4-9199-3123AC9ABC3E">
-        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Server.xml"/>
-      </Component>
-      <Component Id ="Tecan.Sila2.Contracts.xml" Guid="7874F71A-310B-4AA5-B1D5-50ACEED4718D">
-        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Contracts.xml"/>
-      </Component>
-      <Component Id ="Tecan.MAP.Contracts.Services.Logging.xml" Guid="B459BDFE-50C6-4372-8BD8-98A97B38CCB7">
-        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.MAP.Contracts.Services.Logging.xml"/>
-      </Component>
-      <Component Id ="System.Threading.Tasks.Extensions.xml" Guid="13BA6B61-E513-4CB9-AB0A-1ADAB9031E98">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Threading.Tasks.Extensions.xml"/>
-      </Component>
-      <Component Id ="System.Threading.Tasks.Dataflow.xml" Guid="67512521-D9C3-419D-A1D8-3C893D08D073">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Threading.Tasks.Dataflow.xml"/>
-      </Component>
-      <Component Id ="System.Threading.Channels.xml" Guid="B72D48CE-C61B-4C0F-BA02-69326ECE8E6F">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Threading.Channels.xml"/>
-      </Component>
-      <Component Id ="System.Runtime.CompilerServices.Unsafe.xml" Guid="46079C5C-9187-47AE-A6DB-42277760B5FC">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Runtime.CompilerServices.Unsafe.xml"/>
-      </Component>
-      <Component Id ="System.Numerics.Vectors.xml" Guid="729CC99A-0E88-44E0-AE03-F72298EE7EC2">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Numerics.Vectors.xml"/>
-      </Component>
-      <Component Id ="System.Net.IPNetwork.xml" Guid="1DF4A257-B4B2-4ABA-9084-2195A9AC4C03">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Net.IPNetwork.xml"/>
-      </Component>
-      <Component Id ="System.Memory.xml" Guid="95FE0F5C-D789-4CDF-86AA-B6F670A702E9">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Memory.xml"/>
-      </Component>
-      <Component Id ="System.Collections.Immutable.xml" Guid="1AC1532F-99A5-47FC-82A1-3CDF46E6F018">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Collections.Immutable.xml"/>
-      </Component>
-      <Component Id ="System.Buffers.xml" Guid="2E0CEC57-F63C-447F-93E3-36C382AB00F3">
-        <File Source="$(var.SilaFluentServer.TargetDir)System.Buffers.xml"/>
-      </Component>
-      <Component Id ="SimpleBase.xml" Guid="ED9E43DC-65A2-49DF-80D1-A8E25A413225">
-        <File Source="$(var.SilaFluentServer.TargetDir)SimpleBase.xml"/>
-      </Component>
-      <Component Id ="protobuf.net.xml" Guid="1A97AA0C-13AD-4682-8925-4182B32E80D1">
-        <File Source="$(var.SilaFluentServer.TargetDir)protobuf-net.xml"/>
-      </Component>
-      <Component Id ="protobuf.net.Core.xml" Guid="475DC76C-11C8-4AB5-95DF-C9EDAE3CAB24">
-        <File Source="$(var.SilaFluentServer.TargetDir)protobuf-net.Core.xml"/>
-      </Component>
-      <Component Id ="Microsoft.Build.xml" Guid="B74D0C5C-807E-486C-BD4A-8AEEAC9C3AC6">
-        <File Source="$(var.SilaFluentServer.TargetDir)Microsoft.Build.xml"/>
-      </Component>
-      <Component Id ="Microsoft.Build.Framework.xml" Guid="D65EC683-4167-406D-99AC-B4D4A6BE677B">
-        <File Source="$(var.SilaFluentServer.TargetDir)Microsoft.Build.Framework.xml"/>
-      </Component>
-      <Component Id ="Makaretu.Dns.xml" Guid="A8D65268-8809-4211-9845-9A0BB0A5A0A1">
-        <File Source="$(var.SilaFluentServer.TargetDir)Makaretu.Dns.xml"/>
-      </Component>
-      <Component Id ="Makaretu.Dns.Multicast.xml" Guid="15E71904-1024-4EE9-8E4F-E2A820EA2AD2">
-        <File Source="$(var.SilaFluentServer.TargetDir)Makaretu.Dns.Multicast.xml"/>
-      </Component>
-      <Component Id ="Grpc.Core.xml" Guid="36FA112B-B9B1-4572-9507-30C68DC171B6">
-        <File Source="$(var.SilaFluentServer.TargetDir)Grpc.Core.xml"/>
-      </Component>
-      <Component Id ="Grpc.Core.Api.xml" Guid="A459C265-1B7D-4841-AD3C-5B9C7A083558">
-        <File Source="$(var.SilaFluentServer.TargetDir)Grpc.Core.Api.xml"/>
-      </Component>
-      <Component Id ="Common.Logging.xml" Guid="B7196C11-500B-4E01-84E6-E4884AFCDE2D">
-        <File Source="$(var.SilaFluentServer.TargetDir)Common.Logging.xml"/>
-      </Component>
-      <Component Id ="Common.Logging.Core.xml" Guid="296F731D-5ACB-4A0A-9964-2CFD16D7CED2">
-        <File Source="$(var.SilaFluentServer.TargetDir)Common.Logging.Core.xml"/>
-      </Component>
-      <Component Id ="CommandLine.xml" Guid="8ABAAF3A-95D1-4334-B7F3-0006D315FB5B">
-        <File Source="$(var.SilaFluentServer.TargetDir)CommandLine.xml"/>
-      </Component>
-    </ComponentGroup>
-
     <ComponentGroup Id="dll" Directory="Files">
       <Component Id="Contracts" Guid="073DC79A-9AAD-474F-9F7C-7DD0C5452FE1">
-        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Fluent.Contracts.dll"/>
+        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.VisionX.Sila2.Contracts.dll"/>
       </Component>
       <Component Id="SilaFluentController" Guid="9C81B5D5-8FA6-4EEC-8A5E-069B58553F5A">
-        <File Source="$(var.SilaFluentServer.TargetDir)SilaFluentController.dll"/>
+        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.VisionX.Sila2.FluentController.dll"/>
       </Component>        
       <Component Id="Tecan.Sila2.Server.dll" Guid="093B9890-9F1B-4186-B8EE-DD8E3AD76D3D">
         <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Server.dll"/>
@@ -209,6 +70,9 @@
       <Component Id="Microsoft.Build.Framework.dll">
         <File Source="$(var.SilaFluentServer.TargetDir)Microsoft.Build.Framework.dll"/>
       </Component>
+      <Component Id="Microsoft.CSharp.dll">
+        <File Source="$(var.SilaFluentServer.TargetDir)Microsoft.CSharp.dll"/>
+      </Component>
       <Component Id="protobufnet.Core.dll">
         <File Source="$(var.SilaFluentServer.TargetDir)protobuf-net.Core.dll"/>
       </Component>
@@ -242,11 +106,17 @@
       <Component Id="Tecan.MAP.Contracts.Services.Logging.dll">
         <File Source="$(var.SilaFluentServer.TargetDir)Tecan.MAP.Contracts.Services.Logging.dll"/>
       </Component>
+      <Component Id="Tecan.Sila2.Annotations.dll">
+        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Annotations.dll"/>
+      </Component>
       <Component Id="Tecan.Sila2.Contracts.dll">
         <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Contracts.dll"/>
       </Component>
       <Component Id="Tecan.Sila2.dll">
         <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.dll"/>
+      </Component>
+      <Component Id="Tecan.Sila2.Grpc.dll">
+        <File Source="$(var.SilaFluentServer.TargetDir)Tecan.Sila2.Grpc.dll"/>
       </Component>
       <Component Id="Tecan.VisionX.API.ServiceInterfaces.V1.dll">
         <File Source="$(var.SilaFluentServer.TargetDir)Tecan.VisionX.API.ServiceInterfaces.V1.dll"/>
@@ -294,11 +164,7 @@
       <ComponentRef Id="Contracts"/>
       <ComponentRef Id="SilaFluentController" />
       <ComponentGroupRef Id="dll"/>
-      <ComponentGroupRef Id="xml"/>
       <ComponentGroupRef Id="config"/>
-      <ComponentGroupRef Id="pdb"/>
-      <ComponentGroupRef Id="so"/>
-      <ComponentGroupRef Id="dylib"/>
     </Feature>
   </Product>
 </Wix>

@@ -1,6 +1,4 @@
-﻿using Contracts;
-using ComplexCommands;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading;
@@ -11,7 +9,7 @@ using System.Linq;
 using System.Diagnostics;
 
 
-namespace Implementation
+namespace Tecan.VisionX.Sila2
 {
     [Export(typeof(ISilaFluentController))]
     [PartCreationPolicy(CreationPolicy.Shared)]

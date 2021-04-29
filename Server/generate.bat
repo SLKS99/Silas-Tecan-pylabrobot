@@ -1,16 +1,17 @@
 
 
-silagen generate-server -n "SilaFluentController" -o "Tecan.Sila2" .\Contracts\bin\Debug\Tecan.Sila2.Contracts.dll .\SilaFluentServer\SilaFluentServer.csproj
+silagen generate-server -n "SilaFluentController" -o "tecan" -u "fluent" Build\Tecan.VisionX.Sila2.Contracts.dll SilaFluentServer\SilaFluentServer.csproj
+silagen generate-provider .\SilaFluentServer\SimulationController.sila.xml .\SilaFluentServer\SimulationController\Dtos.cs .\SilaFluentServer\SimulationController\Provider.cs -n Tecan.VisionX.Sila2 -s
 
-copy .\SilaFluentServer\SilaFluentController.sila.xml ..\tecan\fluent_sila_project
+copy .\SilaFluentServer\SilaFluentController.sila.xml ..\Python\tecan\fluent_sila_project
 
 cd ..
 
-fluent_python_venv\Scripts\activate
+venv\Scripts\activate
 
-cd tecan
+cd Python\tecan
 
-silacodegenerator -b fluent_sila_project -o _SilaFluentController
+silacodegenerator -b fluent_sila_project -o __SilaFluentController
 
-
+deactivate
 

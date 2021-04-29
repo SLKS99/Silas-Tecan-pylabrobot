@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3DC8C9CE-206D-4A3E-8A4C-84444933C002}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SilaFluentServer</RootNamespace>
+    <RootNamespace>Tecan.VisionX.Sila2</RootNamespace>
     <AssemblyName>SilaFluentServer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Build\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,14 +45,13 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Build\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
+    <StartupObject>Tecan.VisionX.Sila2.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLine, Version=2.7.82.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL">
@@ -179,14 +178,20 @@
     <Reference Include="Tecan.MAP.Contracts.Services.Logging, Version=2.1.0.14695, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Tecan.MAP.Contracts.Services.Logging.2.1.0.14695\lib\net461\Tecan.MAP.Contracts.Services.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Tecan.Sila2, Version=2.0.72.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.2.0.72-master\lib\netstandard2.0\Tecan.Sila2.dll</HintPath>
+    <Reference Include="Tecan.Sila2, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tecan.Sila2.3.3.0\lib\netstandard2.0\Tecan.Sila2.dll</HintPath>
     </Reference>
-    <Reference Include="Tecan.Sila2.Contracts, Version=2.0.72.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Contracts.2.0.72-master\lib\netstandard2.0\Tecan.Sila2.Contracts.dll</HintPath>
+    <Reference Include="Tecan.Sila2.Annotations, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tecan.Sila2.Annotations.3.3.0\lib\netstandard2.0\Tecan.Sila2.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Tecan.Sila2.Server, Version=2.0.72.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Server.2.0.72-master\lib\netstandard2.0\Tecan.Sila2.Server.dll</HintPath>
+    <Reference Include="Tecan.Sila2.Contracts, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tecan.Sila2.Contracts.3.3.0\lib\netstandard2.0\Tecan.Sila2.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Tecan.Sila2.Grpc, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tecan.Sila2.Grpc.3.3.0\lib\netstandard2.0\Tecan.Sila2.Grpc.dll</HintPath>
+    </Reference>
+    <Reference Include="Tecan.Sila2.Server, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tecan.Sila2.Server.3.3.0\lib\netstandard2.0\Tecan.Sila2.Server.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.VisionX.API.V2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

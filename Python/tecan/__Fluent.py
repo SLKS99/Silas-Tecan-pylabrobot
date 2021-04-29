@@ -18,9 +18,6 @@ class Fluent():
     """
     __FORMAT = '%(asctime)-15s %(message)s'
 
-
-    
-
     def __init__(self, server_ip : str, server_port : int):
         """Connects to a SilaFluentServer an creates a Fluent object able to controll an instance of FluentControl.
         :param server_ip: 
@@ -66,9 +63,6 @@ class Fluent():
  
         else:
             logger.info("Labware added successfully")
-
-        
-      
 
     def remove_labware(self, labware_name : str):
         """removes labware from worktable

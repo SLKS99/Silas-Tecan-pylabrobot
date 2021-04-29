@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SilaFluentServer.SilaFluentController
+namespace Tecan.VisionX.Sila2
 {
     using Tecan.Sila2;
     
@@ -31,7 +31,7 @@ namespace SilaFluentServer.SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public StartSimulationModeRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public StartSimulationModeRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         
@@ -75,7 +75,7 @@ namespace SilaFluentServer.SilaFluentController
         /// Create a new instance
         /// </summary>
         /// <param name="store">An object to organize binaries.</param>
-        public StartRealModeRequestDto(Tecan.Sila2.Binary.IBinaryStore store)
+        public StartRealModeRequestDto(Tecan.Sila2.IBinaryStore store)
         {
         }
         

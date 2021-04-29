@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tecan.VisionX.API.V2.Commands;
 
-namespace ComplexCommands
+namespace Tecan.VisionX.Sila2
 {
     public class GetTips : IGenericCommand
     {

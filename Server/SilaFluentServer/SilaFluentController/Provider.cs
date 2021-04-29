@@ -8,905 +8,922 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Contracts;
 using System.Linq;
 using Tecan.Sila2;
 using Tecan.Sila2.Client;
 using Tecan.Sila2.Server;
+using Tecan.VisionX.Sila2;
 
-namespace SilaFluentController
+namespace Tecan.VisionX.Sila2
 {
     
     
     ///  <summary>
-    /// Encapsulates provider classes to expose the Fluent Service feature via SiLA2
+    /// A class that exposes the ISilaFluentController interface via SiLA2
     /// </summary>
-    public sealed partial class SilaFluentControllerProvider
+    [System.ComponentModel.Composition.ExportAttribute(typeof(IFeatureProvider))]
+    [System.ComponentModel.Composition.PartCreationPolicyAttribute(System.ComponentModel.Composition.CreationPolicy.Shared)]
+    public partial class SilaFluentControllerProvider : IFeatureProvider
     {
         
-        private static string @__ServiceName = "sila2.tecan.fluent.silafluentcontroller.v1.SilaFluentController";
+        private ISilaFluentController _implementation;
         
-        private static Grpc.Core.Method<AddLabwareRequestDto, EmptyRequest> AddLabwareMethod = new Grpc.Core.Method<AddLabwareRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "AddLabware", ProtobufMarshaller<AddLabwareRequestDto>.Default, EmptyRequest.Marshaller);
+        private Tecan.Sila2.Server.ISiLAServer _server;
         
-        private static Grpc.Core.Method<RemoveLabwareRequestDto, EmptyRequest> RemoveLabwareMethod = new Grpc.Core.Method<RemoveLabwareRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "RemoveLabware", ProtobufMarshaller<RemoveLabwareRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<SetLocationRequestDto, EmptyRequest> SetLocationMethod = new Grpc.Core.Method<SetLocationRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "SetLocation", ProtobufMarshaller<SetLocationRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<SubroutineRequestDto, EmptyRequest> SubroutineMethod = new Grpc.Core.Method<SubroutineRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "Subroutine", ProtobufMarshaller<SubroutineRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<TransferLabwareRequestDto, EmptyRequest> TransferLabwareMethod = new Grpc.Core.Method<TransferLabwareRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "TransferLabware", ProtobufMarshaller<TransferLabwareRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<TransferLabwareBackToBaseRequestDto, EmptyRequest> TransferLabwareBackToBaseMethod = new Grpc.Core.Method<TransferLabwareBackToBaseRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "TransferLabwareBackToBase", ProtobufMarshaller<TransferLabwareBackToBaseRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<GenericCommandRequestDto, EmptyRequest> GenericCommandMethod = new Grpc.Core.Method<GenericCommandRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "GenericCommand", ProtobufMarshaller<GenericCommandRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<GetFingersRequestDto, EmptyRequest> GetFingersMethod = new Grpc.Core.Method<GetFingersRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "GetFingers", ProtobufMarshaller<GetFingersRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<DropFingersRequestDto, EmptyRequest> DropFingersMethod = new Grpc.Core.Method<DropFingersRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "DropFingers", ProtobufMarshaller<DropFingersRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<UserPromptRequestDto, EmptyRequest> UserPromptMethod = new Grpc.Core.Method<UserPromptRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "UserPrompt", ProtobufMarshaller<UserPromptRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<GetTipsRequestDto, EmptyRequest> GetTipsMethod = new Grpc.Core.Method<GetTipsRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "GetTips", ProtobufMarshaller<GetTipsRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<AspirateRequestDto, EmptyRequest> AspirateMethod = new Grpc.Core.Method<AspirateRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "Aspirate", ProtobufMarshaller<AspirateRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<DispenseRequestDto, EmptyRequest> DispenseMethod = new Grpc.Core.Method<DispenseRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "Dispense", ProtobufMarshaller<DispenseRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<DropTipsRequestDto, EmptyRequest> DropTipsMethod = new Grpc.Core.Method<DropTipsRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "DropTips", ProtobufMarshaller<DropTipsRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<StartFluentOrAttachRequestDto, EmptyRequest> StartFluentOrAttachMethod = new Grpc.Core.Method<StartFluentOrAttachRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "StartFluentOrAttach", ProtobufMarshaller<StartFluentOrAttachRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<StartFluentAndLoginRequestDto, EmptyRequest> StartFluentAndLoginMethod = new Grpc.Core.Method<StartFluentAndLoginRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "StartFluentAndLogin", ProtobufMarshaller<StartFluentAndLoginRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<StartFluentInSimulationModeRequestDto, EmptyRequest> StartFluentInSimulationModeMethod = new Grpc.Core.Method<StartFluentInSimulationModeRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "StartFluentInSimulationMode", ProtobufMarshaller<StartFluentInSimulationModeRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<PrepareMethodRequestDto, EmptyRequest> PrepareMethodMethod = new Grpc.Core.Method<PrepareMethodRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "PrepareMethod", ProtobufMarshaller<PrepareMethodRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<RunMethodRequestDto, EmptyRequest> RunMethodMethod = new Grpc.Core.Method<RunMethodRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "RunMethod", ProtobufMarshaller<RunMethodRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<PauseRunRequestDto, EmptyRequest> PauseRunMethod = new Grpc.Core.Method<PauseRunRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "PauseRun", ProtobufMarshaller<PauseRunRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<ResumeRunRequestDto, EmptyRequest> ResumeRunMethod = new Grpc.Core.Method<ResumeRunRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "ResumeRun", ProtobufMarshaller<ResumeRunRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<StopMethodRequestDto, EmptyRequest> StopMethodMethod = new Grpc.Core.Method<StopMethodRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "StopMethod", ProtobufMarshaller<StopMethodRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<FinishExecutionRequestDto, EmptyRequest> FinishExecutionMethod = new Grpc.Core.Method<FinishExecutionRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "FinishExecution", ProtobufMarshaller<FinishExecutionRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<CloseMethodRequestDto, EmptyRequest> CloseMethodMethod = new Grpc.Core.Method<CloseMethodRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "CloseMethod", ProtobufMarshaller<CloseMethodRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<SetVariableValueRequestDto, EmptyRequest> SetVariableValueMethod = new Grpc.Core.Method<SetVariableValueRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "SetVariableValue", ProtobufMarshaller<SetVariableValueRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<GetVariableNamesRequestDto, GetVariableNamesResponseDto> GetVariableNamesMethod = new Grpc.Core.Method<GetVariableNamesRequestDto, GetVariableNamesResponseDto>(Grpc.Core.MethodType.Unary, @__ServiceName, "GetVariableNames", ProtobufMarshaller<GetVariableNamesRequestDto>.Default, ProtobufMarshaller<GetVariableNamesResponseDto>.Default);
-        
-        private static Grpc.Core.Method<GetVariableValueRequestDto, GetVariableValueResponseDto> GetVariableValueMethod = new Grpc.Core.Method<GetVariableValueRequestDto, GetVariableValueResponseDto>(Grpc.Core.MethodType.Unary, @__ServiceName, "GetVariableValue", ProtobufMarshaller<GetVariableValueRequestDto>.Default, ProtobufMarshaller<GetVariableValueResponseDto>.Default);
-        
-        private static Grpc.Core.Method<GetAllRunnableMethodsRequestDto, GetAllRunnableMethodsResponseDto> GetAllRunnableMethodsMethod = new Grpc.Core.Method<GetAllRunnableMethodsRequestDto, GetAllRunnableMethodsResponseDto>(Grpc.Core.MethodType.Unary, @__ServiceName, "GetAllRunnableMethods", ProtobufMarshaller<GetAllRunnableMethodsRequestDto>.Default, ProtobufMarshaller<GetAllRunnableMethodsResponseDto>.Default);
-        
-        private static Grpc.Core.Method<ShutdownRequestDto, EmptyRequest> ShutdownMethod = new Grpc.Core.Method<ShutdownRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "Shutdown", ProtobufMarshaller<ShutdownRequestDto>.Default, EmptyRequest.Marshaller);
+        private static Tecan.Sila2.Feature _feature = FeatureSerializer.LoadFromAssembly(typeof(SilaFluentControllerProvider).Assembly, "SilaFluentController.sila.xml");
         
         ///  <summary>
-        /// A class that exposes the ISilaFluentController interface via SiLA2
+        /// Creates a new instance
         /// </summary>
-        [System.ComponentModel.Composition.ExportAttribute(typeof(IFeatureProvider))]
-        [System.ComponentModel.Composition.PartCreationPolicyAttribute(System.ComponentModel.Composition.CreationPolicy.Shared)]
-        public partial class Server : IFeatureProvider
+        /// <param name="implementation">The implementation to exported through SiLA2</param>
+        /// <param name="server">The SiLA2 server instance through which the implementation shall be exported</param>
+        [System.ComponentModel.Composition.ImportingConstructorAttribute()]
+        public SilaFluentControllerProvider(ISilaFluentController implementation, Tecan.Sila2.Server.ISiLAServer server)
         {
-            
-            private ISilaFluentController _implementation;
-            
-            private Tecan.Sila2.Server.ISiLAServer _server;
-            
-            private static Tecan.Sila2.Feature _feature = FeatureSerializer.LoadFromAssembly(typeof(Server).Assembly, "SilaFluentController.sila.xml");
-            
-            [System.ComponentModel.Composition.ImportingConstructorAttribute()]
-            public Server(ISilaFluentController implementation, Tecan.Sila2.Server.ISiLAServer server)
+            _implementation = implementation;
+            _server = server;
+        }
+        
+        ///  <summary>
+        /// The feature that is exposed by this feature provider
+        /// </summary>
+        /// <returns>A feature object</returns>
+        public Tecan.Sila2.Feature FeatureDefinition
+        {
+            get
             {
-                _implementation = implementation;
-                _server = server;
+                return _feature;
             }
-            
-            ///  <summary>
-            /// The feature that is exposed by this feature provider
-            /// </summary>
-            /// <returns>A feature object</returns>
-            public Tecan.Sila2.Feature FeatureDefinition
+        }
+        
+        ///  <summary>
+        /// Registers the feature in the provided feature registration
+        /// </summary>
+        /// <param name="registration">The registration component to which the feature should be registered</param>
+        public void Register(IServerBuilder registration)
+        {
+            registration.RegisterUnobservableCommand<AddLabwareRequestDto, EmptyRequest>("AddLabware", AddLabware);
+            registration.RegisterUnobservableCommand<RemoveLabwareRequestDto, EmptyRequest>("RemoveLabware", RemoveLabware);
+            registration.RegisterUnobservableCommand<SetLocationRequestDto, EmptyRequest>("SetLocation", SetLocation);
+            registration.RegisterUnobservableCommand<SubroutineRequestDto, EmptyRequest>("Subroutine", Subroutine);
+            registration.RegisterUnobservableCommand<TransferLabwareRequestDto, EmptyRequest>("TransferLabware", TransferLabware);
+            registration.RegisterUnobservableCommand<TransferLabwareBackToBaseRequestDto, EmptyRequest>("TransferLabwareBackToBase", TransferLabwareBackToBase);
+            registration.RegisterUnobservableCommand<GenericCommandRequestDto, EmptyRequest>("GenericCommand", GenericCommand);
+            registration.RegisterUnobservableCommand<GetFingersRequestDto, EmptyRequest>("GetFingers", GetFingers);
+            registration.RegisterUnobservableCommand<DropFingersRequestDto, EmptyRequest>("DropFingers", DropFingers);
+            registration.RegisterUnobservableCommand<UserPromptRequestDto, EmptyRequest>("UserPrompt", UserPrompt);
+            registration.RegisterUnobservableCommand<GetTipsRequestDto, EmptyRequest>("GetTips", GetTips);
+            registration.RegisterUnobservableCommand<AspirateRequestDto, EmptyRequest>("Aspirate", Aspirate);
+            registration.RegisterUnobservableCommand<DispenseRequestDto, EmptyRequest>("Dispense", Dispense);
+            registration.RegisterUnobservableCommand<DropTipsRequestDto, EmptyRequest>("DropTips", DropTips);
+            registration.RegisterUnobservableCommand<StartFluentOrAttachRequestDto, EmptyRequest>("StartFluentOrAttach", StartFluentOrAttach);
+            registration.RegisterUnobservableCommand<StartFluentAndLoginRequestDto, EmptyRequest>("StartFluentAndLogin", StartFluentAndLogin);
+            registration.RegisterUnobservableCommand<StartFluentInSimulationModeRequestDto, EmptyRequest>("StartFluentInSimulationMode", StartFluentInSimulationMode);
+            registration.RegisterUnobservableCommand<PrepareMethodRequestDto, EmptyRequest>("PrepareMethod", PrepareMethod);
+            registration.RegisterUnobservableCommand<RunMethodRequestDto, EmptyRequest>("RunMethod", RunMethod);
+            registration.RegisterUnobservableCommand<PauseRunRequestDto, EmptyRequest>("PauseRun", PauseRun);
+            registration.RegisterUnobservableCommand<ResumeRunRequestDto, EmptyRequest>("ResumeRun", ResumeRun);
+            registration.RegisterUnobservableCommand<StopMethodRequestDto, EmptyRequest>("StopMethod", StopMethod);
+            registration.RegisterUnobservableCommand<FinishExecutionRequestDto, EmptyRequest>("FinishExecution", FinishExecution);
+            registration.RegisterUnobservableCommand<CloseMethodRequestDto, EmptyRequest>("CloseMethod", CloseMethod);
+            registration.RegisterUnobservableCommand<SetVariableValueRequestDto, EmptyRequest>("SetVariableValue", SetVariableValue);
+            registration.RegisterUnobservableCommand<GetVariableNamesRequestDto, GetVariableNamesResponseDto>("GetVariableNames", GetVariableNames);
+            registration.RegisterUnobservableCommand<GetVariableValueRequestDto, GetVariableValueResponseDto>("GetVariableValue", GetVariableValue);
+            registration.RegisterUnobservableCommand<GetAllRunnableMethodsRequestDto, GetAllRunnableMethodsResponseDto>("GetAllRunnableMethods", GetAllRunnableMethods);
+            registration.RegisterUnobservableCommand<ShutdownRequestDto, EmptyRequest>("Shutdown", Shutdown);
+        }
+        
+        ///  <summary>
+        /// Executes the Add Labware command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest AddLabware(AddLabwareRequestDto request)
+        {
+            try
             {
-                get
-                {
-                    return _feature;
-                }
-            }
-            
-            ///  <summary>
-            /// Creates a service definition for this service provider
-            /// </summary>
-            /// <returns>An object that describes which services are offered by this instance</returns>
-            public Grpc.Core.ServerServiceDefinition CreateServiceDefinition()
-            {
-                Grpc.Core.ServerServiceDefinition.Builder builder = Grpc.Core.ServerServiceDefinition.CreateBuilder();
-                builder.AddMethod(AddLabwareMethod, AddLabware);
-                builder.AddMethod(RemoveLabwareMethod, RemoveLabware);
-                builder.AddMethod(SetLocationMethod, SetLocation);
-                builder.AddMethod(SubroutineMethod, Subroutine);
-                builder.AddMethod(TransferLabwareMethod, TransferLabware);
-                builder.AddMethod(TransferLabwareBackToBaseMethod, TransferLabwareBackToBase);
-                builder.AddMethod(GenericCommandMethod, GenericCommand);
-                builder.AddMethod(GetFingersMethod, GetFingers);
-                builder.AddMethod(DropFingersMethod, DropFingers);
-                builder.AddMethod(UserPromptMethod, UserPrompt);
-                builder.AddMethod(GetTipsMethod, GetTips);
-                builder.AddMethod(AspirateMethod, Aspirate);
-                builder.AddMethod(DispenseMethod, Dispense);
-                builder.AddMethod(DropTipsMethod, DropTips);
-                builder.AddMethod(StartFluentOrAttachMethod, StartFluentOrAttach);
-                builder.AddMethod(StartFluentAndLoginMethod, StartFluentAndLogin);
-                builder.AddMethod(StartFluentInSimulationModeMethod, StartFluentInSimulationMode);
-                builder.AddMethod(PrepareMethodMethod, PrepareMethod);
-                builder.AddMethod(RunMethodMethod, RunMethod);
-                builder.AddMethod(PauseRunMethod, PauseRun);
-                builder.AddMethod(ResumeRunMethod, ResumeRun);
-                builder.AddMethod(StopMethodMethod, StopMethod);
-                builder.AddMethod(FinishExecutionMethod, FinishExecution);
-                builder.AddMethod(CloseMethodMethod, CloseMethod);
-                builder.AddMethod(SetVariableValueMethod, SetVariableValue);
-                builder.AddMethod(GetVariableNamesMethod, GetVariableNames);
-                builder.AddMethod(GetVariableValueMethod, GetVariableValue);
-                builder.AddMethod(GetAllRunnableMethodsMethod, GetAllRunnableMethods);
-                builder.AddMethod(ShutdownMethod, Shutdown);
-                return builder.Build();
-            }
-            
-            private EmptyRequest AddLabwareInternal(AddLabwareRequestDto request)
-            {
-                try
-                {
-                    _implementation.AddLabware(request.Barcode.Extract(_server), request.HasLid.Extract(_server), request.LabwareName.Extract(_server), request.LabwareType.Extract(_server), request.TargetLocation.Extract(_server), ((int)(request.Position.Extract(_server))), ((int)(request.Rotation.Extract(_server))));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the AddLabware command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> AddLabware(AddLabwareRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(AddLabwareInternal, request, context);
-            }
-            
-            private EmptyRequest RemoveLabwareInternal(RemoveLabwareRequestDto request)
-            {
-                try
-                {
-                    _implementation.RemoveLabware(request.LabwareName.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the RemoveLabware command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> RemoveLabware(RemoveLabwareRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(RemoveLabwareInternal, request, context);
-            }
-            
-            private EmptyRequest SetLocationInternal(SetLocationRequestDto request)
-            {
-                try
-                {
-                    _implementation.SetLocation(request.Labware.Extract(_server), ((int)(request.Rotation.Extract(_server))), request.TargetLocation.Extract(_server), ((int)(request.TargetSite.Extract(_server))));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the SetLocation command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> SetLocation(SetLocationRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(SetLocationInternal, request, context);
-            }
-            
-            private EmptyRequest SubroutineInternal(SubroutineRequestDto request)
-            {
-                try
-                {
-                    _implementation.Subroutine(request.SubroutineName.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the Subroutine command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> Subroutine(SubroutineRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(SubroutineInternal, request, context);
-            }
-            
-            private EmptyRequest TransferLabwareInternal(TransferLabwareRequestDto request)
-            {
-                try
-                {
-                    _implementation.TransferLabware(request.LabwareToLocation.Extract(_server), request.OnlyUseSelectedSite.Extract(_server), request.TargetLocation.Extract(_server), ((int)(request.TargetPosition.Extract(_server))));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the TransferLabware command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> TransferLabware(TransferLabwareRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(TransferLabwareInternal, request, context);
-            }
-            
-            private EmptyRequest TransferLabwareBackToBaseInternal(TransferLabwareBackToBaseRequestDto request)
-            {
-                try
-                {
-                    _implementation.TransferLabwareBackToBase(request.LabwareName.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the TransferLabwareBackToBase command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> TransferLabwareBackToBase(TransferLabwareBackToBaseRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(TransferLabwareBackToBaseInternal, request, context);
-            }
-            
-            private EmptyRequest GenericCommandInternal(GenericCommandRequestDto request)
-            {
-                try
-                {
-                    _implementation.GenericCommand(request.Content.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the GenericCommand command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> GenericCommand(GenericCommandRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(GenericCommandInternal, request, context);
-            }
-            
-            private EmptyRequest GetFingersInternal(GetFingersRequestDto request)
-            {
-                try
-                {
-                    _implementation.GetFingers(request.DeviceAlias.Extract(_server), request.GripperFingers.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the GetFingers command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> GetFingers(GetFingersRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(GetFingersInternal, request, context);
-            }
-            
-            private EmptyRequest DropFingersInternal(DropFingersRequestDto request)
-            {
-                try
-                {
-                    _implementation.DropFingers(request.DeviceAlias.Extract(_server), request.DockingStation.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the DropFingers command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> DropFingers(DropFingersRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(DropFingersInternal, request, context);
-            }
-            
-            private EmptyRequest UserPromptInternal(UserPromptRequestDto request)
-            {
-                try
-                {
-                    _implementation.UserPrompt(request.Text.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the UserPrompt command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> UserPrompt(UserPromptRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(UserPromptInternal, request, context);
-            }
-            
-            private EmptyRequest GetTipsInternal(GetTipsRequestDto request)
-            {
-                try
-                {
-                    _implementation.GetTips(((int)(request.AirgapVolume.Extract(_server))), ((int)(request.AirgapSpeed.Extract(_server))), request.DiTiType.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the GetTips command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> GetTips(GetTipsRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(GetTipsInternal, request, context);
-            }
-            
-            private EmptyRequest AspirateInternal(AspirateRequestDto request)
-            {
-                try
-                {
-                    _implementation.Aspirate(((int)(request.Volume.Extract(_server))), request.Labware.Extract(_server), request.LiquidClass.Extract(_server), ((int)(request.WellOffset.Extract(_server))));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the Aspirate command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> Aspirate(AspirateRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(AspirateInternal, request, context);
-            }
-            
-            private EmptyRequest DispenseInternal(DispenseRequestDto request)
-            {
-                try
-                {
-                    _implementation.Dispense(((int)(request.Volume.Extract(_server))), request.Labware.Extract(_server), request.LiquidClass.Extract(_server), ((int)(request.WellOffset.Extract(_server))));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the Dispense command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> Dispense(DispenseRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(DispenseInternal, request, context);
-            }
-            
-            private EmptyRequest DropTipsInternal(DropTipsRequestDto request)
-            {
-                try
-                {
-                    _implementation.DropTips(request.Labware.Extract(_server));
-                    return EmptyRequest.Instance;
-                } catch (NoExecutionChannelException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "", ex.Message);
-                } catch (RuntimeException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the DropTips command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> DropTips(DropTipsRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(DropTipsInternal, request, context);
-            }
-            
-            private EmptyRequest StartFluentOrAttachInternal(StartFluentOrAttachRequestDto request)
-            {
-                _implementation.StartFluentOrAttach();
+                _implementation.AddLabware(request.Barcode.Extract(_server), request.HasLid.Extract(_server), request.LabwareName.Extract(_server), request.LabwareType.Extract(_server), request.TargetLocation.Extract(_server), ((int)(request.Position.Extract(_server))), ((int)(request.Rotation.Extract(_server))));
                 return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the StartFluentOrAttach command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> StartFluentOrAttach(StartFluentOrAttachRequestDto request, Grpc.Core.ServerCallContext context)
+            } catch (System.ArgumentException ex)
             {
-                return _server.InvokeCommand(StartFluentOrAttachInternal, request, context);
+                if ((ex.ParamName == "barcode"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/AddLabware/Parameter/Barcode", ex.Message);
+                }
+                if ((ex.ParamName == "hasLid"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/AddLabware/Parameter/HasLid", ex.Message);
+                }
+                if ((ex.ParamName == "labwareName"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/AddLabware/Parameter/LabwareName", ex.Message);
+                }
+                if ((ex.ParamName == "labwareType"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/AddLabware/Parameter/LabwareType", ex.Message);
+                }
+                if ((ex.ParamName == "targetLocation"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/AddLabware/Parameter/TargetLocation", ex.Message);
+                }
+                if ((ex.ParamName == "position"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/AddLabware/Parameter/Position", ex.Message);
+                }
+                if ((ex.ParamName == "rotation"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/AddLabware/Parameter/Rotation", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
-            
-            private EmptyRequest StartFluentAndLoginInternal(StartFluentAndLoginRequestDto request)
+        }
+        
+        ///  <summary>
+        /// Executes the Remove Labware command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest RemoveLabware(RemoveLabwareRequestDto request)
+        {
+            try
+            {
+                _implementation.RemoveLabware(request.LabwareName.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "labwareName"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/RemoveLabware/Parameter/LabwareName", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Set Location command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest SetLocation(SetLocationRequestDto request)
+        {
+            try
+            {
+                _implementation.SetLocation(request.Labware.Extract(_server), ((int)(request.Rotation.Extract(_server))), request.TargetLocation.Extract(_server), ((int)(request.TargetSite.Extract(_server))));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "labware"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/SetLocation/Parameter/Labware", ex.Message);
+                }
+                if ((ex.ParamName == "rotation"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/SetLocation/Parameter/Rotation", ex.Message);
+                }
+                if ((ex.ParamName == "targetLocation"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/SetLocation/Parameter/TargetLocation" +
+                            "", ex.Message);
+                }
+                if ((ex.ParamName == "targetSite"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/SetLocation/Parameter/TargetSite", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Subroutine command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest Subroutine(SubroutineRequestDto request)
+        {
+            try
+            {
+                _implementation.Subroutine(request.SubroutineName.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "subroutineName"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Subroutine/Parameter/SubroutineName", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Transfer Labware command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest TransferLabware(TransferLabwareRequestDto request)
+        {
+            try
+            {
+                _implementation.TransferLabware(request.LabwareToLocation.Extract(_server), request.OnlyUseSelectedSite.Extract(_server), request.TargetLocation.Extract(_server), ((int)(request.TargetPosition.Extract(_server))));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "labwareToLocation"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/TransferLabware/Parameter/LabwareToL" +
+                            "ocation", ex.Message);
+                }
+                if ((ex.ParamName == "onlyUseSelectedSite"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/TransferLabware/Parameter/OnlyUseSel" +
+                            "ectedSite", ex.Message);
+                }
+                if ((ex.ParamName == "targetLocation"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/TransferLabware/Parameter/TargetLoca" +
+                            "tion", ex.Message);
+                }
+                if ((ex.ParamName == "targetPosition"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/TransferLabware/Parameter/TargetPosi" +
+                            "tion", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Transfer Labware Back To Base command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest TransferLabwareBackToBase(TransferLabwareBackToBaseRequestDto request)
+        {
+            try
+            {
+                _implementation.TransferLabwareBackToBase(request.LabwareName.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "labwareName"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/TransferLabwareBackToBase/Parameter/" +
+                            "LabwareName", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Generic Command command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest GenericCommand(GenericCommandRequestDto request)
+        {
+            try
+            {
+                _implementation.GenericCommand(request.Content.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "content"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/GenericCommand/Parameter/Content", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Get Fingers command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest GetFingers(GetFingersRequestDto request)
+        {
+            try
+            {
+                _implementation.GetFingers(request.DeviceAlias.Extract(_server), request.GripperFingers.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "deviceAlias"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/GetFingers/Parameter/DeviceAlias", ex.Message);
+                }
+                if ((ex.ParamName == "gripperFingers"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/GetFingers/Parameter/GripperFingers", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Drop Fingers command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest DropFingers(DropFingersRequestDto request)
+        {
+            try
+            {
+                _implementation.DropFingers(request.DeviceAlias.Extract(_server), request.DockingStation.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "deviceAlias"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/DropFingers/Parameter/DeviceAlias", ex.Message);
+                }
+                if ((ex.ParamName == "dockingStation"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/DropFingers/Parameter/DockingStation" +
+                            "", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the User Prompt command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest UserPrompt(UserPromptRequestDto request)
+        {
+            try
+            {
+                _implementation.UserPrompt(request.Text.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "text"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/UserPrompt/Parameter/Text", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Get Tips command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest GetTips(GetTipsRequestDto request)
+        {
+            try
+            {
+                _implementation.GetTips(((int)(request.AirgapVolume.Extract(_server))), ((int)(request.AirgapSpeed.Extract(_server))), request.DiTiType.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "airgapVolume"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/GetTips/Parameter/AirgapVolume", ex.Message);
+                }
+                if ((ex.ParamName == "airgapSpeed"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/GetTips/Parameter/AirgapSpeed", ex.Message);
+                }
+                if ((ex.ParamName == "diTiType"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/GetTips/Parameter/DiTiType", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Aspirate command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest Aspirate(AspirateRequestDto request)
+        {
+            try
+            {
+                _implementation.Aspirate(((int)(request.Volume.Extract(_server))), request.Labware.Extract(_server), request.LiquidClass.Extract(_server), ((int)(request.WellOffset.Extract(_server))));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "volume"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Aspirate/Parameter/Volume", ex.Message);
+                }
+                if ((ex.ParamName == "labware"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Aspirate/Parameter/Labware", ex.Message);
+                }
+                if ((ex.ParamName == "liquidClass"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Aspirate/Parameter/LiquidClass", ex.Message);
+                }
+                if ((ex.ParamName == "wellOffset"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Aspirate/Parameter/WellOffset", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Dispense command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest Dispense(DispenseRequestDto request)
+        {
+            try
+            {
+                _implementation.Dispense(((int)(request.Volume.Extract(_server))), request.Labware.Extract(_server), request.LiquidClass.Extract(_server), ((int)(request.WellOffset.Extract(_server))));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "volume"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Dispense/Parameter/Volume", ex.Message);
+                }
+                if ((ex.ParamName == "labware"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Dispense/Parameter/Labware", ex.Message);
+                }
+                if ((ex.ParamName == "liquidClass"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Dispense/Parameter/LiquidClass", ex.Message);
+                }
+                if ((ex.ParamName == "wellOffset"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Dispense/Parameter/WellOffset", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Drop Tips command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest DropTips(DropTipsRequestDto request)
+        {
+            try
+            {
+                _implementation.DropTips(request.Labware.Extract(_server));
+                return EmptyRequest.Instance;
+            } catch (System.ArgumentException ex)
+            {
+                if ((ex.ParamName == "labware"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/DropTips/Parameter/Labware", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
+            } catch (NoExecutionChannelException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+            } catch (RuntimeException ex)
+            {
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+            }
+        }
+        
+        ///  <summary>
+        /// Executes the Start Fluent Or Attach command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest StartFluentOrAttach(StartFluentOrAttachRequestDto request)
+        {
+            _implementation.StartFluentOrAttach();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Start Fluent And Login command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest StartFluentAndLogin(StartFluentAndLoginRequestDto request)
+        {
+            try
             {
                 _implementation.StartFluentAndLogin(request.Username.Extract(_server), request.Password.Extract(_server));
                 return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the StartFluentAndLogin command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> StartFluentAndLogin(StartFluentAndLoginRequestDto request, Grpc.Core.ServerCallContext context)
+            } catch (System.ArgumentException ex)
             {
-                return _server.InvokeCommand(StartFluentAndLoginInternal, request, context);
+                if ((ex.ParamName == "username"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/StartFluentAndLogin/Parameter/Userna" +
+                            "me", ex.Message);
+                }
+                if ((ex.ParamName == "password"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/StartFluentAndLogin/Parameter/Passwo" +
+                            "rd", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             }
-            
-            private EmptyRequest StartFluentInSimulationModeInternal(StartFluentInSimulationModeRequestDto request)
-            {
-                _implementation.StartFluentInSimulationMode();
-                return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the StartFluentInSimulationMode command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> StartFluentInSimulationMode(StartFluentInSimulationModeRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(StartFluentInSimulationModeInternal, request, context);
-            }
-            
-            private EmptyRequest PrepareMethodInternal(PrepareMethodRequestDto request)
+        }
+        
+        ///  <summary>
+        /// Executes the Start Fluent In Simulation Mode command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest StartFluentInSimulationMode(StartFluentInSimulationModeRequestDto request)
+        {
+            _implementation.StartFluentInSimulationMode();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Prepare Method command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest PrepareMethod(PrepareMethodRequestDto request)
+        {
+            try
             {
                 _implementation.PrepareMethod(request.ToPrepare.Extract(_server));
                 return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the PrepareMethod command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> PrepareMethod(PrepareMethodRequestDto request, Grpc.Core.ServerCallContext context)
+            } catch (System.ArgumentException ex)
             {
-                return _server.InvokeCommand(PrepareMethodInternal, request, context);
+                if ((ex.ParamName == "toPrepare"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/PrepareMethod/Parameter/ToPrepare", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             }
-            
-            private EmptyRequest RunMethodInternal(RunMethodRequestDto request)
-            {
-                _implementation.RunMethod();
-                return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the RunMethod command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> RunMethod(RunMethodRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(RunMethodInternal, request, context);
-            }
-            
-            private EmptyRequest PauseRunInternal(PauseRunRequestDto request)
-            {
-                _implementation.PauseRun();
-                return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the PauseRun command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> PauseRun(PauseRunRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(PauseRunInternal, request, context);
-            }
-            
-            private EmptyRequest ResumeRunInternal(ResumeRunRequestDto request)
-            {
-                _implementation.ResumeRun();
-                return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the ResumeRun command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> ResumeRun(ResumeRunRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(ResumeRunInternal, request, context);
-            }
-            
-            private EmptyRequest StopMethodInternal(StopMethodRequestDto request)
-            {
-                _implementation.StopMethod();
-                return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the StopMethod command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> StopMethod(StopMethodRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(StopMethodInternal, request, context);
-            }
-            
-            private EmptyRequest FinishExecutionInternal(FinishExecutionRequestDto request)
-            {
-                _implementation.FinishExecution();
-                return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the FinishExecution command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> FinishExecution(FinishExecutionRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(FinishExecutionInternal, request, context);
-            }
-            
-            private EmptyRequest CloseMethodInternal(CloseMethodRequestDto request)
-            {
-                _implementation.CloseMethod();
-                return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the CloseMethod command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> CloseMethod(CloseMethodRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(CloseMethodInternal, request, context);
-            }
-            
-            private EmptyRequest SetVariableValueInternal(SetVariableValueRequestDto request)
+        }
+        
+        ///  <summary>
+        /// Executes the Run Method command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest RunMethod(RunMethodRequestDto request)
+        {
+            _implementation.RunMethod();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Pause Run command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest PauseRun(PauseRunRequestDto request)
+        {
+            _implementation.PauseRun();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Resume Run command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest ResumeRun(ResumeRunRequestDto request)
+        {
+            _implementation.ResumeRun();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Stop Method command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest StopMethod(StopMethodRequestDto request)
+        {
+            _implementation.StopMethod();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Finish Execution command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest FinishExecution(FinishExecutionRequestDto request)
+        {
+            _implementation.FinishExecution();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Close Method command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest CloseMethod(CloseMethodRequestDto request)
+        {
+            _implementation.CloseMethod();
+            return EmptyRequest.Instance;
+        }
+        
+        ///  <summary>
+        /// Executes the Set Variable Value command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest SetVariableValue(SetVariableValueRequestDto request)
+        {
+            try
             {
                 _implementation.SetVariableValue(request.VariableName.Extract(_server), request.Value.Extract(_server));
                 return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the SetVariableValue command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> SetVariableValue(SetVariableValueRequestDto request, Grpc.Core.ServerCallContext context)
+            } catch (System.ArgumentException ex)
             {
-                return _server.InvokeCommand(SetVariableValueInternal, request, context);
+                if ((ex.ParamName == "variableName"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/SetVariableValue/Parameter/VariableN" +
+                            "ame", ex.Message);
+                }
+                if ((ex.ParamName == "value"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/SetVariableValue/Parameter/Value", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             }
-            
-            private GetVariableNamesResponseDto GetVariableNamesInternal(GetVariableNamesRequestDto request)
-            {
-                return new GetVariableNamesResponseDto(_implementation.GetVariableNames(), _server);
-            }
-            
-            ///  <summary>
-            /// Executes the GetVariableNames command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<GetVariableNamesResponseDto> GetVariableNames(GetVariableNamesRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(GetVariableNamesInternal, request, context);
-            }
-            
-            private GetVariableValueResponseDto GetVariableValueInternal(GetVariableValueRequestDto request)
+        }
+        
+        ///  <summary>
+        /// Executes the Get Variable Names command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual GetVariableNamesResponseDto GetVariableNames(GetVariableNamesRequestDto request)
+        {
+            return new GetVariableNamesResponseDto(_implementation.GetVariableNames(), _server);
+        }
+        
+        ///  <summary>
+        /// Executes the Get Variable Value command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual GetVariableValueResponseDto GetVariableValue(GetVariableValueRequestDto request)
+        {
+            try
             {
                 return new GetVariableValueResponseDto(_implementation.GetVariableValue(request.VariableName.Extract(_server)), _server);
-            }
-            
-            ///  <summary>
-            /// Executes the GetVariableValue command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<GetVariableValueResponseDto> GetVariableValue(GetVariableValueRequestDto request, Grpc.Core.ServerCallContext context)
+            } catch (System.ArgumentException ex)
             {
-                return _server.InvokeCommand(GetVariableValueInternal, request, context);
+                if ((ex.ParamName == "variableName"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/GetVariableValue/Parameter/VariableN" +
+                            "ame", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             }
-            
-            private GetAllRunnableMethodsResponseDto GetAllRunnableMethodsInternal(GetAllRunnableMethodsRequestDto request)
-            {
-                return new GetAllRunnableMethodsResponseDto(_implementation.GetAllRunnableMethods(), _server);
-            }
-            
-            ///  <summary>
-            /// Executes the GetAllRunnableMethods command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<GetAllRunnableMethodsResponseDto> GetAllRunnableMethods(GetAllRunnableMethodsRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(GetAllRunnableMethodsInternal, request, context);
-            }
-            
-            private EmptyRequest ShutdownInternal(ShutdownRequestDto request)
+        }
+        
+        ///  <summary>
+        /// Executes the Get All Runnable Methods command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual GetAllRunnableMethodsResponseDto GetAllRunnableMethods(GetAllRunnableMethodsRequestDto request)
+        {
+            return new GetAllRunnableMethodsResponseDto(_implementation.GetAllRunnableMethods(), _server);
+        }
+        
+        ///  <summary>
+        /// Executes the Shutdown command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest Shutdown(ShutdownRequestDto request)
+        {
+            try
             {
                 _implementation.Shutdown(((int)(request.Timeout.Extract(_server))));
                 return EmptyRequest.Instance;
-            }
-            
-            ///  <summary>
-            /// Executes the Shutdown command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> Shutdown(ShutdownRequestDto request, Grpc.Core.ServerCallContext context)
+            } catch (System.ArgumentException ex)
             {
-                return _server.InvokeCommand(ShutdownInternal, request, context);
+                if ((ex.ParamName == "timeout"))
+                {
+                    throw _server.ErrorHandling.CreateValidationError("tecan/fluent/SilaFluentController/v1/Command/Shutdown/Parameter/Timeout", ex.Message);
+                }
+                throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             }
-            
-            ///  <summary>
-            /// Gets the command with the given identifier
-            /// </summary>
-            /// <param name="commandIdentifier">A fully qualified command identifier</param>
-            /// <returns>A method object or null, if the command is not supported</returns>
-            public System.Reflection.MethodInfo GetCommand(string commandIdentifier)
+        }
+        
+        ///  <summary>
+        /// Gets the command with the given identifier
+        /// </summary>
+        /// <param name="commandIdentifier">A fully qualified command identifier</param>
+        /// <returns>A method object or null, if the command is not supported</returns>
+        public System.Reflection.MethodInfo GetCommand(string commandIdentifier)
+        {
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/AddLabware"))
             {
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/AddLabware"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("AddLabware");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/RemoveLabware"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("RemoveLabware");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/SetLocation"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("SetLocation");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Subroutine"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("Subroutine");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/TransferLabware"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("TransferLabware");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/TransferLabwareBackToBase"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("TransferLabwareBackToBase");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GenericCommand"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("GenericCommand");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetFingers"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("GetFingers");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/DropFingers"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("DropFingers");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/UserPrompt"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("UserPrompt");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetTips"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("GetTips");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Aspirate"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("Aspirate");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Dispense"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("Dispense");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/DropTips"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("DropTips");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StartFluentOrAttach"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("StartFluentOrAttach");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StartFluentAndLogin"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("StartFluentAndLogin");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StartFluentInSimulationMode"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("StartFluentInSimulationMode");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/PrepareMethod"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("PrepareMethod");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/RunMethod"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("RunMethod");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/PauseRun"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("PauseRun");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/ResumeRun"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("ResumeRun");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StopMethod"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("StopMethod");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/FinishExecution"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("FinishExecution");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/CloseMethod"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("CloseMethod");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/SetVariableValue"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("SetVariableValue");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetVariableNames"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("GetVariableNames");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetVariableValue"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("GetVariableValue");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetAllRunnableMethods"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("GetAllRunnableMethods");
-                }
-                if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Shutdown"))
-                {
-                    return typeof(ISilaFluentController).GetMethod("Shutdown");
-                }
-                return null;
+                return typeof(ISilaFluentController).GetMethod("AddLabware");
             }
-            
-            ///  <summary>
-            /// Gets the property with the given identifier
-            /// </summary>
-            /// <param name="propertyIdentifier">A fully qualified property identifier</param>
-            /// <returns>A property object or null, if the property is not supported</returns>
-            public System.Reflection.PropertyInfo GetProperty(string propertyIdentifier)
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/RemoveLabware"))
             {
-                return null;
+                return typeof(ISilaFluentController).GetMethod("RemoveLabware");
             }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/SetLocation"))
+            {
+                return typeof(ISilaFluentController).GetMethod("SetLocation");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Subroutine"))
+            {
+                return typeof(ISilaFluentController).GetMethod("Subroutine");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/TransferLabware"))
+            {
+                return typeof(ISilaFluentController).GetMethod("TransferLabware");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/TransferLabwareBackToBase"))
+            {
+                return typeof(ISilaFluentController).GetMethod("TransferLabwareBackToBase");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GenericCommand"))
+            {
+                return typeof(ISilaFluentController).GetMethod("GenericCommand");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetFingers"))
+            {
+                return typeof(ISilaFluentController).GetMethod("GetFingers");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/DropFingers"))
+            {
+                return typeof(ISilaFluentController).GetMethod("DropFingers");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/UserPrompt"))
+            {
+                return typeof(ISilaFluentController).GetMethod("UserPrompt");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetTips"))
+            {
+                return typeof(ISilaFluentController).GetMethod("GetTips");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Aspirate"))
+            {
+                return typeof(ISilaFluentController).GetMethod("Aspirate");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Dispense"))
+            {
+                return typeof(ISilaFluentController).GetMethod("Dispense");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/DropTips"))
+            {
+                return typeof(ISilaFluentController).GetMethod("DropTips");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StartFluentOrAttach"))
+            {
+                return typeof(ISilaFluentController).GetMethod("StartFluentOrAttach");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StartFluentAndLogin"))
+            {
+                return typeof(ISilaFluentController).GetMethod("StartFluentAndLogin");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StartFluentInSimulationMode"))
+            {
+                return typeof(ISilaFluentController).GetMethod("StartFluentInSimulationMode");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/PrepareMethod"))
+            {
+                return typeof(ISilaFluentController).GetMethod("PrepareMethod");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/RunMethod"))
+            {
+                return typeof(ISilaFluentController).GetMethod("RunMethod");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/PauseRun"))
+            {
+                return typeof(ISilaFluentController).GetMethod("PauseRun");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/ResumeRun"))
+            {
+                return typeof(ISilaFluentController).GetMethod("ResumeRun");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/StopMethod"))
+            {
+                return typeof(ISilaFluentController).GetMethod("StopMethod");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/FinishExecution"))
+            {
+                return typeof(ISilaFluentController).GetMethod("FinishExecution");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/CloseMethod"))
+            {
+                return typeof(ISilaFluentController).GetMethod("CloseMethod");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/SetVariableValue"))
+            {
+                return typeof(ISilaFluentController).GetMethod("SetVariableValue");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetVariableNames"))
+            {
+                return typeof(ISilaFluentController).GetMethod("GetVariableNames");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetVariableValue"))
+            {
+                return typeof(ISilaFluentController).GetMethod("GetVariableValue");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/GetAllRunnableMethods"))
+            {
+                return typeof(ISilaFluentController).GetMethod("GetAllRunnableMethods");
+            }
+            if ((commandIdentifier == "tecan/fluent/SilaFluentController/v1/Command/Shutdown"))
+            {
+                return typeof(ISilaFluentController).GetMethod("Shutdown");
+            }
+            return null;
+        }
+        
+        ///  <summary>
+        /// Gets the property with the given identifier
+        /// </summary>
+        /// <param name="propertyIdentifier">A fully qualified property identifier</param>
+        /// <returns>A property object or null, if the property is not supported</returns>
+        public System.Reflection.PropertyInfo GetProperty(string propertyIdentifier)
+        {
+            return null;
         }
     }
 }

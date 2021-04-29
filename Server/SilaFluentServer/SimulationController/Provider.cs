@@ -12,320 +12,137 @@ using System.Linq;
 using Tecan.Sila2;
 using Tecan.Sila2.Client;
 using Tecan.Sila2.Server;
-using Contracts;
 
-namespace SilaFluentServer.SilaFluentController
+namespace Tecan.VisionX.Sila2
 {
     
     
     ///  <summary>
-    /// Encapsulates provider classes to expose the Simulation Controller feature via SiLA2
+    /// A class that exposes the ISimulationController interface via SiLA2
     /// </summary>
-    public sealed partial class SimulationControllerProvider
+    [System.ComponentModel.Composition.ExportAttribute(typeof(IFeatureProvider))]
+    [System.ComponentModel.Composition.PartCreationPolicyAttribute(System.ComponentModel.Composition.CreationPolicy.Shared)]
+    public partial class SimulationControllerProvider : IFeatureProvider
     {
         
-        private static string @__ServiceName = "sila2.org.silastandard.core.simulationcontroller.v1.SimulationController";
+        private ISimulationController _implementation;
         
-        private static Grpc.Core.Method<StartSimulationModeRequestDto, EmptyRequest> StartSimulationModeMethod = new Grpc.Core.Method<StartSimulationModeRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "StartSimulationMode", ProtobufMarshaller<StartSimulationModeRequestDto>.Default, EmptyRequest.Marshaller);
+        private Tecan.Sila2.Server.ISiLAServer _server;
         
-        private static Grpc.Core.Method<StartRealModeRequestDto, EmptyRequest> StartRealModeMethod = new Grpc.Core.Method<StartRealModeRequestDto, EmptyRequest>(Grpc.Core.MethodType.Unary, @__ServiceName, "StartRealMode", ProtobufMarshaller<StartRealModeRequestDto>.Default, EmptyRequest.Marshaller);
-        
-        private static Grpc.Core.Method<EmptyRequest, PropertyResponse<Tecan.Sila2.BooleanDto>> GetSimulationModeMethod = new Grpc.Core.Method<EmptyRequest, PropertyResponse<Tecan.Sila2.BooleanDto>>(Grpc.Core.MethodType.Unary, @__ServiceName, "Get_SimulationMode", EmptyRequest.Marshaller, ProtobufMarshaller<PropertyResponse<Tecan.Sila2.BooleanDto>>.Default);
+        private static Tecan.Sila2.Feature _feature = FeatureSerializer.LoadFromAssembly(typeof(SimulationControllerProvider).Assembly, "SimulationController.sila.xml");
         
         ///  <summary>
-        /// A class that exposes the ISimulationController interface via SiLA2
+        /// Creates a new instance
         /// </summary>
-        [System.ComponentModel.Composition.ExportAttribute(typeof(IFeatureProvider))]
-        [System.ComponentModel.Composition.PartCreationPolicyAttribute(System.ComponentModel.Composition.CreationPolicy.Shared)]
-        public partial class Server : IFeatureProvider
+        /// <param name="implementation">The implementation to exported through SiLA2</param>
+        /// <param name="server">The SiLA2 server instance through which the implementation shall be exported</param>
+        [System.ComponentModel.Composition.ImportingConstructorAttribute()]
+        public SimulationControllerProvider(ISimulationController implementation, Tecan.Sila2.Server.ISiLAServer server)
         {
-            
-            private ISimulationController _implementation;
-            
-            private Tecan.Sila2.Server.ISiLAServer _server;
-            
-            private static Tecan.Sila2.Feature _feature = FeatureSerializer.LoadFromAssembly(typeof(Server).Assembly, "SimulationController.sila.xml");
-            
-            [System.ComponentModel.Composition.ImportingConstructorAttribute()]
-            public Server(ISimulationController implementation, Tecan.Sila2.Server.ISiLAServer server)
+            _implementation = implementation;
+            _server = server;
+        }
+        
+        ///  <summary>
+        /// The feature that is exposed by this feature provider
+        /// </summary>
+        /// <returns>A feature object</returns>
+        public Tecan.Sila2.Feature FeatureDefinition
+        {
+            get
             {
-                _implementation = implementation;
-                _server = server;
-            }
-            
-            ///  <summary>
-            /// The feature that is exposed by this feature provider
-            /// </summary>
-            /// <returns>A feature object</returns>
-            public Tecan.Sila2.Feature FeatureDefinition
-            {
-                get
-                {
-                    return _feature;
-                }
-            }
-            
-            ///  <summary>
-            /// Creates a service definition for this service provider
-            /// </summary>
-            /// <returns>An object that describes which services are offered by this instance</returns>
-            public Grpc.Core.ServerServiceDefinition CreateServiceDefinition()
-            {
-                Grpc.Core.ServerServiceDefinition.Builder builder = Grpc.Core.ServerServiceDefinition.CreateBuilder();
-                builder.AddMethod(StartSimulationModeMethod, StartSimulationMode);
-                builder.AddMethod(StartRealModeMethod, StartRealMode);
-                builder.AddMethod(GetSimulationModeMethod, GetSimulationMode);
-                return builder.Build();
-            }
-            
-            private EmptyRequest StartSimulationModeInternal(StartSimulationModeRequestDto request)
-            {
-                try
-                {
-                    _implementation.StartSimulationMode();
-                    return EmptyRequest.Instance;
-                } catch (StartSimulationModeFailedException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedError/StartSimulationModeFai" +
-                            "led", "\n      The server cannot change to Simulation Mode.\n      This error can, e.g., b" +
-                            "e thrown, if a real-world process needs to be ended before switching to simulati" +
-                            "on\n      mode.\n    ", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the Start Simulation Mode command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> StartSimulationMode(StartSimulationModeRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(StartSimulationModeInternal, request, context);
-            }
-            
-            private EmptyRequest StartRealModeInternal(StartRealModeRequestDto request)
-            {
-                try
-                {
-                    _implementation.StartRealMode();
-                    return EmptyRequest.Instance;
-                } catch (StartRealModeFailedException ex)
-                {
-                    throw ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedError/StartRealModeFailed", "\n      The server cannot change to Real Mode.\n      This error can, e.g., be thro" +
-                            "wn, if a device is not ready to change into Real Mode.\n    ", ex.Message);
-                }
-            }
-            
-            ///  <summary>
-            /// Executes the Start Real Mode command
-            /// </summary>
-            /// <param name="request">A data transfer object that contains the command parameters</param>
-            /// <param name="context">The context in which the command is issued</param>
-            /// <returns>The command response wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<EmptyRequest> StartRealMode(StartRealModeRequestDto request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.InvokeCommand(StartRealModeInternal, request, context);
-            }
-            
-            ///  <summary>
-            /// Gets the current value of the SimulationMode property
-            /// </summary>
-            /// <param name="request">The request object</param>
-            /// <param name="context">The context in which the request is made</param>
-            /// <returns>The current value wrapped in a data transfer object</returns>
-            protected virtual System.Threading.Tasks.Task<PropertyResponse<Tecan.Sila2.BooleanDto>> GetSimulationMode(EmptyRequest request, Grpc.Core.ServerCallContext context)
-            {
-                return _server.CreatePropertyTask("org.silastandard/core/SimulationController/v1/Property/SimulationMode", new PropertyResponse<Tecan.Sila2.BooleanDto>(new Tecan.Sila2.BooleanDto(_implementation.SimulationMode, _server)), context);
-            }
-            
-            ///  <summary>
-            /// Gets the command with the given identifier
-            /// </summary>
-            /// <param name="commandIdentifier">A fully qualified command identifier</param>
-            /// <returns>A method object or null, if the command is not supported</returns>
-            public System.Reflection.MethodInfo GetCommand(string commandIdentifier)
-            {
-                if ((commandIdentifier == "org.silastandard/core/SimulationController/v1/Command/StartSimulationMode"))
-                {
-                    return typeof(ISimulationController).GetMethod("StartSimulationMode");
-                }
-                if ((commandIdentifier == "org.silastandard/core/SimulationController/v1/Command/StartRealMode"))
-                {
-                    return typeof(ISimulationController).GetMethod("StartRealMode");
-                }
-                return null;
-            }
-            
-            ///  <summary>
-            /// Gets the property with the given identifier
-            /// </summary>
-            /// <param name="propertyIdentifier">A fully qualified property identifier</param>
-            /// <returns>A property object or null, if the property is not supported</returns>
-            public System.Reflection.PropertyInfo GetProperty(string propertyIdentifier)
-            {
-                if ((propertyIdentifier == "org.silastandard/core/SimulationController/v1/Property/SimulationMode"))
-                {
-                    return typeof(ISimulationController).GetProperty("SimulationMode");
-                }
-                return null;
+                return _feature;
             }
         }
         
         ///  <summary>
-        /// Class that implements the ISimulationController interface through SiLA2
+        /// Registers the feature in the provided feature registration
         /// </summary>
-        public partial class Client : Grpc.Core.ClientBase<Client>, ISimulationController
+        /// <param name="registration">The registration component to which the feature should be registered</param>
+        public void Register(IServerBuilder registration)
         {
-            
-            private System.Lazy<bool> _simulationMode;
-            
-            private IClientExecutionManager _executionManager;
-            
-            public Client(IClientExecutionManager executionManager)
+            registration.RegisterUnobservableCommand<StartSimulationModeRequestDto, EmptyRequest>("StartSimulationMode", StartSimulationMode);
+            registration.RegisterUnobservableCommand<StartRealModeRequestDto, EmptyRequest>("StartRealMode", StartRealMode);
+            registration.RegisterUnobservableProperty("SimulationMode", GetSimulationMode);
+        }
+        
+        ///  <summary>
+        /// Executes the Start Simulation Mode command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest StartSimulationMode(StartSimulationModeRequestDto request)
+        {
+            try
             {
-                InitLazyRequests();
-                _executionManager = executionManager;
-            }
-            
-            protected Client(ClientBaseConfiguration configuration, IClientExecutionManager executionManager) : 
-                    base(configuration)
+                _implementation.StartSimulationMode();
+                return EmptyRequest.Instance;
+            } catch (StartSimulationModeFailedException ex)
             {
-                InitLazyRequests();
-                _executionManager = executionManager;
+                throw _server.ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedError/StartSimulationModeFai" +
+                        "led", "\n      The server cannot change to Simulation Mode.\n      This error can, e.g., b" +
+                        "e thrown, if a real-world process needs to be ended before switching to simulati" +
+                        "on\n      mode.\n    ", ex.Message);
             }
-            
-            public Client(Grpc.Core.Channel channel, IClientExecutionManager executionManager) : 
-                    base(channel)
+        }
+        
+        ///  <summary>
+        /// Executes the Start Real Mode command
+        /// </summary>
+        /// <param name="request">A data transfer object that contains the command parameters</param>
+        /// <returns>The command response wrapped in a data transfer object</returns>
+        protected virtual EmptyRequest StartRealMode(StartRealModeRequestDto request)
+        {
+            try
             {
-                InitLazyRequests();
-                _executionManager = executionManager;
-            }
-            
-            ///  <summary>
-            /// Indication whether SiLA Server is in Simulation Mode or not.
-            /// </summary>
-            public virtual bool SimulationMode
+                _implementation.StartRealMode();
+                return EmptyRequest.Instance;
+            } catch (StartRealModeFailedException ex)
             {
-                get
-                {
-                    return _simulationMode.Value;
-                }
+                throw _server.ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedError/StartRealModeFailed", "\n      The server cannot change to Real Mode.\n      This error can, e.g., be thro" +
+                        "wn, if a device is not ready to change into Real Mode.\n    ", ex.Message);
             }
-            
-            private bool RequestSimulationMode()
+        }
+        
+        ///  <summary>
+        /// Gets the current value of the SimulationMode property
+        /// </summary>
+        /// <returns>The current value wrapped in a data transfer object</returns>
+        protected virtual PropertyResponse<Tecan.Sila2.BooleanDto> GetSimulationMode()
+        {
+            return new PropertyResponse<Tecan.Sila2.BooleanDto>(new Tecan.Sila2.BooleanDto(_implementation.SimulationMode, _server));
+        }
+        
+        ///  <summary>
+        /// Gets the command with the given identifier
+        /// </summary>
+        /// <param name="commandIdentifier">A fully qualified command identifier</param>
+        /// <returns>A method object or null, if the command is not supported</returns>
+        public System.Reflection.MethodInfo GetCommand(string commandIdentifier)
+        {
+            if ((commandIdentifier == "org.silastandard/core/SimulationController/v1/Command/StartSimulationMode"))
             {
-                Tecan.Sila2.Client.IClientCallInfo callInfo = _executionManager.CreateCallOptions("org.silastandard/core/SimulationController/v1/Property/SimulationMode");
-                try
-                {
-                    bool response = CallInvoker.BlockingUnaryCall(GetSimulationModeMethod, null, callInfo.Options, EmptyRequest.Instance).Value.Extract(_executionManager.DownloadBinaryStore);
-                    callInfo.FinishSuccessful();
-                    return response;
-                } catch (System.Exception ex)
-                {
-                    System.Exception exception = ErrorHandling.ConvertException(ex);
-                    callInfo.FinishWithErrors(exception);
-                    throw exception;
-                }
+                return typeof(ISimulationController).GetMethod("StartSimulationMode");
             }
-            
-            ///  <summary>
-            /// Initializes lazies for non-observable properties.
-            /// </summary>
-            private void InitLazyRequests()
+            if ((commandIdentifier == "org.silastandard/core/SimulationController/v1/Command/StartRealMode"))
             {
-                _simulationMode = new System.Lazy<bool>(RequestSimulationMode);
+                return typeof(ISimulationController).GetMethod("StartRealMode");
             }
-            
-            ///  <summary>
-            /// Sets the SiLA Server to run in Simulation Mode, i.e. all following commands are executed in simulation mode.
-            /// The Simulation Mode can only be entered, if all hardware operations have been safely terminated
-            /// or are in a controlled, safe state.
-            /// The simulation mode can be stopped by issuing the 'Start Real Mode' command.
-            /// </summary>
-            public virtual void StartSimulationMode()
+            return null;
+        }
+        
+        ///  <summary>
+        /// Gets the property with the given identifier
+        /// </summary>
+        /// <param name="propertyIdentifier">A fully qualified property identifier</param>
+        /// <returns>A property object or null, if the property is not supported</returns>
+        public System.Reflection.PropertyInfo GetProperty(string propertyIdentifier)
+        {
+            if ((propertyIdentifier == "org.silastandard/core/SimulationController/v1/Property/SimulationMode"))
             {
-                StartSimulationModeRequestDto request = new StartSimulationModeRequestDto(null);
-                Tecan.Sila2.Client.IClientCallInfo callInfo = _executionManager.CreateCallOptions("org.silastandard/core/SimulationController/v1/Command/StartSimulationMode");
-                try
-                {
-                    CallInvoker.BlockingUnaryCall(StartSimulationModeMethod, null, callInfo.Options, request);
-                    callInfo.FinishSuccessful();
-                    return;
-                } catch (System.Exception ex)
-                {
-                    System.Exception exception = ErrorHandling.ConvertException(ex, ConvertStartSimulationModeException);
-                    callInfo.FinishWithErrors(exception);
-                    throw exception;
-                }
+                return typeof(ISimulationController).GetProperty("SimulationMode");
             }
-            
-            ///  <summary>
-            /// Converts the error ocurred during execution of StartSimulationMode to a proper exception
-            /// </summary>
-            /// <param name="error">The SiLA2 execution error</param>
-            /// <returns>The converted exception or null, if the error is not understood</returns>
-            private static System.Exception ConvertStartSimulationModeException(Tecan.Sila2.DefinedExecutionErrorDto error)
-            {
-                if ((error.ErrorIdentifier == "org.silastandard/core/SimulationController/v1/DefinedError/StartSimulationModeFai" +
-                    "led"))
-                {
-                    return new StartSimulationModeFailedException(error.Message);
-                }
-                return null;
-            }
-            
-            ///  <summary>
-            /// Sets the SiLA Server to run in real mode, i.e. all following commands are executed with real-world
-            /// interactions, like serial port/CAN communication, motor actions etc.
-            /// If the server is in Simulation Mode it can be interrupted at any time. A re-initialization of
-            /// the hardware might be required. The Real Mode can be stopped by issuing the 'Start Simulation Mode' command.
-            /// </summary>
-            public virtual void StartRealMode()
-            {
-                StartRealModeRequestDto request = new StartRealModeRequestDto(null);
-                Tecan.Sila2.Client.IClientCallInfo callInfo = _executionManager.CreateCallOptions("org.silastandard/core/SimulationController/v1/Command/StartRealMode");
-                try
-                {
-                    CallInvoker.BlockingUnaryCall(StartRealModeMethod, null, callInfo.Options, request);
-                    callInfo.FinishSuccessful();
-                    return;
-                } catch (System.Exception ex)
-                {
-                    System.Exception exception = ErrorHandling.ConvertException(ex, ConvertStartRealModeException);
-                    callInfo.FinishWithErrors(exception);
-                    throw exception;
-                }
-            }
-            
-            ///  <summary>
-            /// Converts the error ocurred during execution of StartRealMode to a proper exception
-            /// </summary>
-            /// <param name="error">The SiLA2 execution error</param>
-            /// <returns>The converted exception or null, if the error is not understood</returns>
-            private static System.Exception ConvertStartRealModeException(Tecan.Sila2.DefinedExecutionErrorDto error)
-            {
-                if ((error.ErrorIdentifier == "org.silastandard/core/SimulationController/v1/DefinedError/StartRealModeFailed"))
-                {
-                    return new StartRealModeFailedException(error.Message);
-                }
-                return null;
-            }
-            
-            ///  <summary>
-            /// Creates a new instance
-            /// </summary>
-            /// <param name="configuration">The new client configuration</param>
-            protected override Client NewInstance(ClientBaseConfiguration configuration)
-            {
-                return new Client(configuration, _executionManager);
-            }
-            
-            private T Extract<T>(Tecan.Sila2.ISilaTransferObject<T> dto)
-            
-            {
-                return dto.Extract(_executionManager.DownloadBinaryStore);
-            }
+            return null;
         }
     }
 }
