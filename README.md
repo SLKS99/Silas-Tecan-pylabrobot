@@ -37,9 +37,9 @@ path\to\virtualenv\Scripts\activate
 pip install sila2lib
 ```
 
-Next, navigate into the tecan folder and type:
+Next, navigate into the Python folder and type:
 ```bash
-setup.py install
+python setup.py install
 ```
 
 If the setup is successful you will be able to use the python client in any python-script by just importing it:
@@ -47,8 +47,12 @@ If the setup is successful you will be able to use the python client in any pyth
 from tecan import Fluent
 ```
 
-To start the server just install it via the windows installer and start SilaFluentServer.exe
-Now you can connect the python by initializing a Fluent-Object in your script:
+To start the server just install it via the windows installer (in the Binaries folder). Note: The installation will succeed in under 1 sec and without confirmation. Next, start the SiLAServer: 
+```cmd
+C:\Program Files (x86)\SilaFluentServerSetup\Files\SilaFluentServer.exe
+```
+
+Now you can connect python by initializing a Fluent-Object in your script:
 
 ```python
 fluent = Fluent(string server-ip, int port)
@@ -69,4 +73,4 @@ fluent.start_fluent(username=”abc”, password=”xyz”)
 If you see an issue please feel free to file a bug on the project [list of issues](https://gitlab.com/tecan/fluent-sila2-connector/issues)
 
 ## License
-This code is licensed under the [New BSD License](https://choosealicense.com/licenses/bsd-3-clause/)
+This code is licensed under the [New BSD License](https://choosealicense.com/licenses/bsd-3-clause/). This means, the code in this repository can be used free of charge, but also without warranties.
