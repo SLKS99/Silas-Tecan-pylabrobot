@@ -78,18 +78,28 @@ class SilaFluentControllerClient(SiLA2Client):
                  server_hostname: str = "localhost", server_ip: str = "127.0.0.1", server_port: int = 50051,
                  cert_file: Optional[str] = None,
                  raise_exceptions: Optional[bool] = True):
-
         """Class initialiser"""
-        super().__init__(
-            name=name, description=description,
-            server_name=server_name,
-            client_uuid=client_uuid,
-            version=version,
-            vendor_url=vendor_url,
-            server_hostname=server_hostname, server_ip=server_ip, server_port=server_port,
-            cert_file=cert_file,
-            raise_exceptions = raise_exceptions
-        )
+        try:
+            super().__init__(
+                name=name, description=description,
+                server_name=server_name,
+                client_uuid=client_uuid,
+                version=version,
+                vendor_url=vendor_url,
+                server_hostname=server_hostname, server_ip=server_ip, server_port=server_port,
+                cert_file=cert_file,
+                raise_exceptions = raise_exceptions
+            )
+        except TypeError:
+            super().__init__(
+                name=name, description=description,
+                server_name=server_name,
+                client_uuid=client_uuid,
+                version=version,
+                vendor_url=vendor_url,
+                server_hostname=server_hostname, server_ip=server_ip, server_port=server_port,
+                cert_file=cert_file
+            )
 
 
         logger.info(
