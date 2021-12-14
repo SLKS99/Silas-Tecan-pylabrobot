@@ -1,6 +1,8 @@
 from os.path import dirname, join
-
 from setuptools import find_packages, setup
+
+import src.tecan as package
+package_version = package.__version__
 
 base_dir = dirname(__file__)
 package_dir = "src"
@@ -16,7 +18,7 @@ code_quality_requirements = [
 
 setup(
     name=name,
-    version="0.2.0",
+    version=package_version,
     author="Tecan Trading AG",
     author_email="swdev.support@tecan.com",
     description="Python interface for FluentControl",
@@ -38,7 +40,7 @@ setup(
     packages=find_packages(where=package_dir),
     package_dir={"": package_dir},
     install_requires=[
-        "sila2",
+        "sila2==0.1.0",
     ],
     python_requires=">=3.7",
     extras_require=dict(
