@@ -1,57 +1,49 @@
-'''setup.py'''
+from os.path import dirname, join
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup # pylint:disable=no-name-in-module, import-error
+from setuptools import find_packages, setup
 
-import tecan
-import pip
-from optparse import Option
-options = Option("--workaround")
-options.skip_requirements_regex = None
-reqs_file = './requirements.txt'
-pipmajor = int(pip.__version__[0:pip.__version__.index(".")])
+base_dir = dirname(__file__)
+package_dir = "src"
+name = "tecan"
 
-# Hack for old pip versions
-if pipmajor >= 10:
-    # Versions greater or equal to 10.x don't rely on pip.req.parse_requirements
-    install_reqs = list(val.strip() for val in open(reqs_file))
-    reqs = install_reqs
-elif pipmajor == 1:
-    # Versions 1.x rely on pip.req.parse_requirements
-    # but don't require a "session" parameter
-    from pip.req import parse_requirements # pylint:disable=no-name-in-module, import-error
-    install_reqs = parse_requirements(reqs_file, options=options)
-    reqs = [str(ir.req) for ir in install_reqs]
-else:
-    # Versions greater than 1.x but smaller than 10.x rely on pip.req.parse_requirements
-    # and requires a "session" parameter
-    from pip.req import parse_requirements # pylint:disable=no-name-in-module, import-error
-    from pip.download import PipSession  # pylint:disable=no-name-in-module, import-error
-    options.isolated_mode = False
-    install_reqs = parse_requirements(  # pylint:disable=unexpected-keyword-arg
-        reqs_file,
-        session=PipSession,
-        options=options
-    )
-    reqs = [str(ir.req) for ir in install_reqs]
+test_requirements = [
+    "pytest",
+    "pytest-cov",  # pytest: code coverage
+]
+code_quality_requirements = [
+    "flake8",  # style checker
+]
 
-config = {
-    'description': 'Python Client for Tecan instruments',
-    'author': 'Tecan Trading AG',
-    'url': 'http://www.tecan.com',
-    'author_email': 'swdev.support@tecan.com',
-    'version': tecan.__version__,
-    'install_requires': reqs,
-    'packages': ['tecan', 'tecan.__SilaFluentController', 'tecan.__SilaFluentController.SilaFluentController', 
-    'tecan.__SilaFluentController.SilaFluentController.gRPC', 'tecan.__SilaFluentController.meta'],
-    'package_data': {
+setup(
+    name=name,
+    version="0.2.0",
+    author="Tecan Trading AG",
+    author_email="swdev.support@tecan.com",
+    description="Python interface for FluentControl",
+    long_description=open(join(dirname(__file__), "..", "README.md"), encoding="utf-8").read(),
+    long_description_content_type="text/markdown",
+    url="https://gitlab.com/tecan/fluent-sila2-connector",
+    project_urls={
+        "Source": "https://gitlab.com/tecan/fluent-sila2-connector",
+        "Bug Reports": "https://gitlab.com/tecan/fluent-sila2-connector/-/issues",
     },
-    'scripts': [],
-    'name': 'tecan',
-    'include_package_data': True,
-    'python_requires': '>=3.6',
-}
-
-setup(**config)
+    classifiers=[
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "Intended Audience :: Healthcare Industry",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+    ],
+    packages=find_packages(where=package_dir),
+    package_dir={"": package_dir},
+    install_requires=[
+        "sila2",
+    ],
+    python_requires=">=3.7",
+    extras_require=dict(
+        tests=test_requirements,
+        dev=test_requirements + code_quality_requirements,
+    ),
+    include_package_data=True,
+)

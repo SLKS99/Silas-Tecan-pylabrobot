@@ -64,7 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComplexCommands.cs" />
+    <Compile Include="Aspirate.cs" />
+    <Compile Include="DropTips.cs" />
+    <Compile Include="Dispense.cs" />
+    <Compile Include="GetTips.cs" />
     <Compile Include="SilaFluentController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -64,10 +64,10 @@
       <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.2.27.0\lib\net45\Grpc.Core.dll</HintPath>
+      <HintPath>..\packages\Grpc.Core.2.40.0\lib\net45\Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core.Api, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.Api.2.27.0\lib\net45\Grpc.Core.Api.dll</HintPath>
+      <HintPath>..\packages\Grpc.Core.Api.2.40.0\lib\net45\Grpc.Core.Api.dll</HintPath>
     </Reference>
     <Reference Include="Makaretu.Dns, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Makaretu.Dns.2.0.1\lib\net472\Makaretu.Dns.dll</HintPath>
@@ -179,19 +179,19 @@
       <HintPath>..\packages\Tecan.MAP.Contracts.Services.Logging.2.1.0.14695\lib\net461\Tecan.MAP.Contracts.Services.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.Sila2, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.3.3.0\lib\netstandard2.0\Tecan.Sila2.dll</HintPath>
+      <HintPath>..\packages\Tecan.Sila2.3.3.2\lib\netstandard2.0\Tecan.Sila2.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.Sila2.Annotations, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Annotations.3.3.0\lib\netstandard2.0\Tecan.Sila2.Annotations.dll</HintPath>
+      <HintPath>..\packages\Tecan.Sila2.Annotations.3.3.2\lib\netstandard2.0\Tecan.Sila2.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.Sila2.Contracts, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Contracts.3.3.0\lib\netstandard2.0\Tecan.Sila2.Contracts.dll</HintPath>
+      <HintPath>..\packages\Tecan.Sila2.Contracts.3.3.2\lib\netstandard2.0\Tecan.Sila2.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.Sila2.Grpc, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Grpc.3.3.0\lib\netstandard2.0\Tecan.Sila2.Grpc.dll</HintPath>
+      <HintPath>..\packages\Tecan.Sila2.Grpc.3.3.2\lib\netstandard2.0\Tecan.Sila2.Grpc.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.Sila2.Server, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Server.3.3.0\lib\netstandard2.0\Tecan.Sila2.Server.dll</HintPath>
+      <HintPath>..\packages\Tecan.Sila2.Server.3.3.2\lib\netstandard2.0\Tecan.Sila2.Server.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.VisionX.API.V2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -251,8 +251,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Setup.Configuration.Interop.2.3.2262-g94fae01e\build\Microsoft.VisualStudio.Setup.Configuration.Interop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Setup.Configuration.Interop.2.3.2262-g94fae01e\build\Microsoft.VisualStudio.Setup.Configuration.Interop.targets'))" />
-    <Error Condition="!Exists('..\packages\Grpc.Core.2.27.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.2.27.0\build\net45\Grpc.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\Grpc.Core.2.40.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.2.40.0\build\net45\Grpc.Core.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.VisualStudio.Setup.Configuration.Interop.2.3.2262-g94fae01e\build\Microsoft.VisualStudio.Setup.Configuration.Interop.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Setup.Configuration.Interop.2.3.2262-g94fae01e\build\Microsoft.VisualStudio.Setup.Configuration.Interop.targets')" />
-  <Import Project="..\packages\Grpc.Core.2.27.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.2.27.0\build\net45\Grpc.Core.targets')" />
+  <Import Project="..\packages\Grpc.Core.2.40.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.2.40.0\build\net45\Grpc.Core.targets')" />
 </Project>

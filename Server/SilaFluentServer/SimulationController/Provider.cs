@@ -79,7 +79,7 @@ namespace Tecan.VisionX.Sila2
                 return EmptyRequest.Instance;
             } catch (StartSimulationModeFailedException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedError/StartSimulationModeFai" +
+                throw _server.ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedExecutionError/StartSimulationModeFai" +
                         "led", "\n      The server cannot change to Simulation Mode.\n      This error can, e.g., b" +
                         "e thrown, if a real-world process needs to be ended before switching to simulati" +
                         "on\n      mode.\n    ", ex.Message);
@@ -99,7 +99,7 @@ namespace Tecan.VisionX.Sila2
                 return EmptyRequest.Instance;
             } catch (StartRealModeFailedException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedError/StartRealModeFailed", "\n      The server cannot change to Real Mode.\n      This error can, e.g., be thro" +
+                throw _server.ErrorHandling.CreateExecutionError("org.silastandard/core/SimulationController/v1/DefinedExecutionError/StartRealModeFailed", "\n      The server cannot change to Real Mode.\n      This error can, e.g., be thro" +
                         "wn, if a device is not ready to change into Real Mode.\n    ", ex.Message);
             }
         }

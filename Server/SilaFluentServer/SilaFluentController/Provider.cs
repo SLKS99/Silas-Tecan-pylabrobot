@@ -137,10 +137,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -164,10 +164,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -204,10 +204,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -231,10 +231,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -274,10 +274,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -302,10 +302,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -329,10 +329,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -360,10 +360,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -392,10 +392,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -419,10 +419,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -454,10 +454,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -493,10 +493,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -532,10 +532,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         
@@ -559,10 +559,10 @@ namespace Tecan.VisionX.Sila2
                 throw _server.ErrorHandling.CreateUnknownValidationError(ex);
             } catch (NoExecutionChannelException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/NoExecutionChannel", "Denotes the error that no execution channel has been opened", ex.Message);
             } catch (RuntimeException ex)
             {
-                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
+                throw _server.ErrorHandling.CreateExecutionError("tecan/fluent/SilaFluentController/v1/DefinedExecutionError/Runtime", "Denotes that an error occurred while executing a script", ex.Message);
             }
         }
         

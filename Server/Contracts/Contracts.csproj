@@ -71,7 +71,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Tecan.Sila2.Annotations, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tecan.Sila2.Annotations.3.3.0\lib\netstandard2.0\Tecan.Sila2.Annotations.dll</HintPath>
+      <HintPath>..\packages\Tecan.Sila2.Annotations.3.3.2\lib\netstandard2.0\Tecan.Sila2.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="Tecan.VisionX.API.V2">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Tecan\FluentControl\Tecan.VisionX.API.V2.dll</HintPath>

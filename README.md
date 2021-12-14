@@ -34,7 +34,7 @@ path\to\virtualenv\Scripts\activate
 
 ### With virtualenv activated:
 ```bash
-pip install sila2lib
+pip install sila2
 ```
 
 Next, navigate into the Python folder and type:
@@ -55,12 +55,17 @@ C:\Program Files (x86)\SilaFluentServerSetup\Files\SilaFluentServer.exe
 Now you can connect python by initializing a Fluent-Object in your script:
 
 ```python
-fluent = Fluent(string server-ip, int port)
+fluent = Fluent("127.0.0.1", 50052)
 ```
 
 and start fluent from your script:
 ```python
 fluent.start_fluent()
+```
+
+As an alternative to the above, we now also support discovery. This means, the following will also work:
+```python
+fluent = Fluent.discover(10)
 ```
 
 To login with UMS you can add username and password like this:
