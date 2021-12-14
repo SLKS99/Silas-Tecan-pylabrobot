@@ -1,7 +1,9 @@
 from os.path import dirname, join
+
 from setuptools import find_packages, setup
 
 import src.tecan as package
+
 package_version = package.__version__
 
 base_dir = dirname(__file__)
