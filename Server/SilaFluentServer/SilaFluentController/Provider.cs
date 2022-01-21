@@ -14,15 +14,15 @@ using Tecan.Sila2.Client;
 using Tecan.Sila2.Server;
 using Tecan.VisionX.Sila2;
 
-namespace Tecan.VisionX.Sila2
+namespace Tecan.VisionX.Sila2.SilaFluentController
 {
-    
-    
+
+
     ///  <summary>
     /// A class that exposes the ISilaFluentController interface via SiLA2
     /// </summary>
-    [System.ComponentModel.Composition.ExportAttribute(typeof(IFeatureProvider))]
-    [System.ComponentModel.Composition.PartCreationPolicyAttribute(System.ComponentModel.Composition.CreationPolicy.Shared)]
+    [System.ComponentModel.Composition.ExportAttribute( typeof( IFeatureProvider ) )]
+    [System.ComponentModel.Composition.PartCreationPolicyAttribute( System.ComponentModel.Composition.CreationPolicy.Shared )]
     public partial class SilaFluentControllerProvider : IFeatureProvider
     {
         
@@ -31,7 +31,7 @@ namespace Tecan.VisionX.Sila2
         private Tecan.Sila2.Server.ISiLAServer _server;
         
         private static Tecan.Sila2.Feature _feature = FeatureSerializer.LoadFromAssembly(typeof(SilaFluentControllerProvider).Assembly, "SilaFluentController.sila.xml");
-        
+
         ///  <summary>
         /// Creates a new instance
         /// </summary>

@@ -7,13 +7,15 @@ using Tecan.VisionX.API.V2.Commands;
 using Tecan.VisionX.API.V2.Implementation.Commands;
 using System.Linq;
 using System.Diagnostics;
-
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Tecan.VisionX.Sila2
 {
     [Export(typeof(ISilaFluentController))]
+    [Export(typeof(ISilaFluentStatusProvider))]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public class SilaFluentController : ISilaFluentController
+    public class SilaFluentController : ISilaFluentController, ISilaFluentStatusProvider, INotifyPropertyChanged
     {
         private readonly ManualResetEventSlim _waitForRuntimeIsReady = new ManualResetEventSlim(false);
         private readonly ManualResetEventSlim _waitForEditMode = new ManualResetEventSlim(false);
@@ -22,6 +24,32 @@ namespace Tecan.VisionX.Sila2
         private IExecutionChannel _currentExecutionChannel;
         private readonly List<IExecutionChannel> _openExecutionChannels = new List<IExecutionChannel>();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        #region Properties
+
+        private FluentControlState _state = FluentControlState.Unknown;
+        private int _progress = -1;
+        private string _errorMessage;
+
+        public FluentControlState State
+        {
+            get => _state;
+            set => Set( ref _state, value );
+        }
+
+        public int Progress
+        {
+            get => _progress;
+            set => Set( ref _progress, value );
+        }
+
+        public string LastError
+        {
+            get => _errorMessage;
+            set => Set( ref _errorMessage, value );
+        }
+
+        #endregion
         #region Commands
         public void DropFingers(string deviceAlias, string dockingStation)
         {
@@ -203,13 +231,12 @@ namespace Tecan.VisionX.Sila2
             _process.StartOrAttach();
 
 
-            if (!alreadyStarted)
+            if(!alreadyStarted)
             {
                 _waitForRuntimeIsReady.Wait();
             }
 
-            _runtime = (RuntimeController)_process.GetRuntime();
-            _runtime.ChannelOpens += Runtime_ChannelOpens;
+            CreateRuntimeAndRegisterEvents();
             PrepareMethodRun();
         }
 
@@ -225,29 +252,24 @@ namespace Tecan.VisionX.Sila2
                 _waitForRuntimeIsReady.Wait();
             }
 
-            _runtime = (RuntimeController)_process.GetRuntime();
-            _runtime.ChannelOpens += Runtime_ChannelOpens;
+            CreateRuntimeAndRegisterEvents();
             PrepareMethodRun();
 
         }
 
         public void StartFluentOrAttach()
         {
-
             bool alreadyStarted = _process.IsRunning();
             _process.RuntimeIsAvailable += Process_RuntimeIsAvailable;
             _process.StartOrAttach();
-
             
             if (!alreadyStarted)
             {
                 _waitForRuntimeIsReady.Wait();
             }
-            
-            _runtime = (RuntimeController)_process.GetRuntime();
-            _runtime.ChannelOpens += Runtime_ChannelOpens;
-            PrepareMethodRun();
-            
+
+            CreateRuntimeAndRegisterEvents();
+            PrepareMethodRun();            
         }
 
         public void Shutdown( int timeout )
@@ -276,6 +298,35 @@ namespace Tecan.VisionX.Sila2
                 throw new InvalidOperationException( "No runtime available. This may be because FluentControl has not been started." );
             }
         }
+
+        private void Set<T>(ref T field, T value, [CallerMemberName] string property = null)
+        {
+            if (!EqualityComparer<T>.Default.Equals(field, value))
+            {
+                field = value;
+                PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( property ) );
+            }
+        }
+
+        private void CreateRuntimeAndRegisterEvents()
+        {
+            _runtime = (RuntimeController)_process.GetRuntime();
+            _runtime.ChannelOpens += Runtime_ChannelOpens;
+            _runtime.ModeChanged += Runtime_ModeChanged;
+            _runtime.ProgressChanged += Runtime_ProgressChanged;
+            _runtime.Error += Runtime_Error;
+        }
+
+        private void Runtime_Error( string message )
+        {
+            LastError = message;
+        }
+
+        private void Runtime_ProgressChanged( int value )
+        {
+            Progress = value;
+        }
+
         private void Process_RuntimeIsAvailable()
         {
             _waitForRuntimeIsReady.Set();
@@ -316,8 +367,6 @@ namespace Tecan.VisionX.Sila2
 
         private void PrepareMethodRun() 
         {
-            _runtime = _runtime ?? (RuntimeController)_process.GetRuntime();
-            _runtime.ModeChanged += Runtime_ModeChanged;
             if (_runtime.GetFluentStatus() != StateMachineStates.EditMode)
             {
                 _waitForEditMode.Wait();
@@ -327,6 +376,7 @@ namespace Tecan.VisionX.Sila2
 
         private void Runtime_ModeChanged(StateMachineStates old, StateMachineStates current)
         {
+            State = (FluentControlState)current;
             if (current == StateMachineStates.EditMode)
             {
                 _waitForEditMode.Set();

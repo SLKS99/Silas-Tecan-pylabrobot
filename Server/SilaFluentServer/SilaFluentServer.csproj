@@ -203,6 +203,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SilaFluentController\Dtos.cs" />
     <Compile Include="SilaFluentController\Provider.cs" />
+    <Compile Include="SilaFluentStatusProvider\Dtos.cs" />
+    <Compile Include="SilaFluentStatusProvider\Provider.cs" />
     <Compile Include="SimulationController\Dtos.cs" />
     <Compile Include="SimulationController\ISimulationController.cs" />
     <Compile Include="SimulationController\Provider.cs" />
@@ -232,7 +234,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="SilaFluentStatusProvider.sila.xml" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>

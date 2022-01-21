@@ -78,7 +78,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FluentControlState.cs" />
     <Compile Include="ISilaFluentController.cs" />
+    <Compile Include="ISilaFluentStatusProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

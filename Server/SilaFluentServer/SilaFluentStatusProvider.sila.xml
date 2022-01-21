@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SiLA2Version="1.0" FeatureVersion="1.0" Originator="tecan" Category="fluent" xmlns="http://www.sila-standard.org">
+  <Identifier>SilaFluentStatusProvider</Identifier>
+  <DisplayName>FluentControl Status Provider</DisplayName>
+  <Description>Denotes a status provider for FluentControl</Description>
+  <Property>
+    <Identifier>State</Identifier>
+    <DisplayName>State</DisplayName>
+    <Description>Gets the state of FluentControl</Description>
+    <Observable>Yes</Observable>
+    <DataType>
+      <DataTypeIdentifier>FluentControlState</DataTypeIdentifier>
+    </DataType>
+  </Property>
+  <Property>
+    <Identifier>Progress</Identifier>
+    <DisplayName>Progress</DisplayName>
+    <Description>Gets the value of the last progress update</Description>
+    <Observable>Yes</Observable>
+    <DataType>
+      <Basic>Integer</Basic>
+    </DataType>
+  </Property>
+  <DataTypeDefinition>
+    <Identifier>FluentControlState</Identifier>
+    <DisplayName>Fluent Control State</DisplayName>
+    <Description>Denotes the possible Fluent Control States</Description>
+    <DataType>
+      <Constrained>
+        <DataType>
+          <Basic>String</Basic>
+        </DataType>
+        <Constraints>
+          <Set>
+            <Value>StartUpPhaseLoading</Value>
+            <Value>StartUpPhaseAdditionalLoadingAndUserLogIn</Value>
+            <Value>StartUpPhaseError</Value>
+            <Value>StartUpPhaseSystemReady</Value>
+            <Value>StartUpPhaseAborting</Value>
+            <Value>ShutDownShuttingDown</Value>
+            <Value>EditMode</Value>
+            <Value>RunModePreRunChecks</Value>
+            <Value>RunModePreparingRun</Value>
+            <Value>RunModePreparingRecovery</Value>
+            <Value>RunModeWaitingForSystem</Value>
+            <Value>RunModeQueryVariables</Value>
+            <Value>RunModeRunning</Value>
+            <Value>RunModePauseRequested</Value>
+            <Value>RunModePaused</Value>
+            <Value>RunModeStopOnError</Value>
+            <Value>RunModeRunFinished</Value>
+            <Value>RunModeResetTips</Value>
+            <Value>RunModeResumeConditionCheck</Value>
+            <Value>RunModeBeginRun</Value>
+            <Value>RunModeRecoveryRunning</Value>
+            <Value>Unknown</Value>
+          </Set>
+        </Constraints>
+      </Constrained>
+    </DataType>
+  </DataTypeDefinition>
+</Feature>

@@ -27,7 +27,7 @@ class Fluent:
             self.__client = client
         else:
             self.__client = SilaClient(server_ip, server_port, **kwargs)
-        if "SilaFluentController" not in dir(client):
+        if "SilaFluentController" not in dir(self.__client):
             raise AttributeError("The connected server is not a FluentControl SiLA2 Server")
         self.variables = VariableContainer(self)
         logger.info("successfully connected to the server")
@@ -292,6 +292,19 @@ class Fluent:
         :type timeout: int
         """
         self.__client.SilaFluentController.Shutdown(timeout)
+
+    def __progress(self):
+        return self.__client.SilaFluentStatusProvider.Progress
+
+    def __state(self):
+        return self.__client.SilaFluentStatusProvider.State
+
+    def __lastError(self):
+        return self.__client.SilaFluentStatusProvider.LastError
+
+    progress = property(__progress, doc="Gets the value of the last progress update")
+    state = property(__state, doc="Gets the state of FluentControl")
+    lastError = property(__lastError, doc="Gets the last error message")
 
     @staticmethod
     def discover(timeout: float = 0):

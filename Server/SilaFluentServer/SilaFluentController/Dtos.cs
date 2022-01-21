@@ -10,7 +10,7 @@
 
 using Tecan.VisionX.Sila2;
 
-namespace Tecan.VisionX.Sila2
+namespace Tecan.VisionX.Sila2.SilaFluentController
 {
     using Tecan.Sila2;
     
