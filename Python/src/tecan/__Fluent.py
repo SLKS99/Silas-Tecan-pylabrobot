@@ -7,6 +7,7 @@ from enum import Enum
 
 from sila2.client import SilaClient
 from sila2.discovery import SilaDiscoveryBrowser
+import threading
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ class Fluent:
             self.__client = SilaClient(server_ip, server_port, **kwargs)
         if "SilaFluentController" not in dir(self.__client):
             raise AttributeError("The connected server is not a FluentControl SiLA2 Server")
-        self.variables = VariableContainer(self)
+        self.variables = _VariableContainer(self)
         logger.info("successfully connected to the server")
 
     def add_labware(
@@ -294,13 +295,28 @@ class Fluent:
         self.__client.SilaFluentController.Shutdown(timeout)
 
     def __progress(self):
-        return self.__client.SilaFluentStatusProvider.Progress
+        return self.__client.SilaFluentStatusProvider.Progress.get()
 
     def __state(self):
-        return self.__client.SilaFluentStatusProvider.State
+        return self.__client.SilaFluentStatusProvider.State.get()
 
     def __lastError(self):
-        return self.__client.SilaFluentStatusProvider.LastError
+        return self.__client.SilaFluentStatusProvider.LastError.get()
+
+    def subscribe_progress(self, progress_callback):
+        """Subscribes to the current progress with the given callback"""
+        subscription = self.__client.SilaFluentStatusProvider.Progress.subscribe()
+        return _CallbackSubscription(subscription, progress_callback)
+
+    def subscribe_state(self, state_callback):
+        """Subscribes to the state with the given callback"""
+        subscription = self.__client.SilaFluentStatusProvider.State.subscribe()
+        return _CallbackSubscription(subscription, state_callback)
+
+    def subscribe_error(self, error_callback):
+        """Subscribes to the error messages with the given callback"""
+        subscription = self.__client.SilaFluentStatusProvider.LastError.subscribe()
+        return _CallbackSubscription(subscription, error_callback)
 
     progress = property(__progress, doc="Gets the value of the last progress update")
     state = property(__state, doc="Gets the state of FluentControl")
@@ -314,8 +330,28 @@ class Fluent:
         if client is not None:
             return Fluent(client=client)
 
+class _CallbackSubscription:
+    def __init__(self, subscription, callback) -> None:
+        self.__subscription = subscription
+        self.__callback = callback
+        thread = threading.Thread(target=self.__run)
+        thread.start()
+        self.__thread = thread
 
-class VariableContainer:
+    def __run(self):
+        for item in self.__subscription:
+            if item is None or item is "":
+                continue
+            try:
+                self.__callback(item)
+            except Exception as e:
+                logger.error("Subscription callback raised an error", e)
+
+    def cancel(self):
+        self.__subscription.cancel()
+        self.__thread.join()
+
+class _VariableContainer:
     """Encapsulates FluentControl variables"""
 
     variables = {}
