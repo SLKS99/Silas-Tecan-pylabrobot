@@ -21,6 +21,15 @@
       <Basic>Integer</Basic>
     </DataType>
   </Property>
+  <Property>
+    <Identifier>LastError</Identifier>
+    <DisplayName>Last Error</DisplayName>
+    <Description>Gets the last error message</Description>
+    <Observable>Yes</Observable>
+    <DataType>
+      <Basic>String</Basic>
+    </DataType>
+  </Property>
   <DataTypeDefinition>
     <Identifier>FluentControlState</Identifier>
     <DisplayName>Fluent Control State</DisplayName>

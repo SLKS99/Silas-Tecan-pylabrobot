@@ -16,13 +16,13 @@ using Tecan.VisionX.Sila2;
 
 namespace Tecan.VisionX.Sila2.SilaFluentStatusProvider
 {
-
-
+    
+    
     ///  <summary>
     /// A class that exposes the ISilaFluentStatusProvider interface via SiLA2
     /// </summary>
-    [System.ComponentModel.Composition.ExportAttribute( typeof( IFeatureProvider ) )]
-    [System.ComponentModel.Composition.PartCreationPolicyAttribute( System.ComponentModel.Composition.CreationPolicy.Shared )]
+    [System.ComponentModel.Composition.ExportAttribute(typeof(IFeatureProvider))]
+    [System.ComponentModel.Composition.PartCreationPolicyAttribute(System.ComponentModel.Composition.CreationPolicy.Shared)]
     public partial class SilaFluentStatusProviderProvider : IFeatureProvider
     {
         
@@ -31,7 +31,7 @@ namespace Tecan.VisionX.Sila2.SilaFluentStatusProvider
         private Tecan.Sila2.Server.ISiLAServer _server;
         
         private static Tecan.Sila2.Feature _feature = FeatureSerializer.LoadFromAssembly(typeof(SilaFluentStatusProviderProvider).Assembly, "SilaFluentStatusProvider.sila.xml");
-
+        
         ///  <summary>
         /// Creates a new instance
         /// </summary>
@@ -64,6 +64,7 @@ namespace Tecan.VisionX.Sila2.SilaFluentStatusProvider
         {
             registration.RegisterObservableProperty("State", GetState, _implementation);
             registration.RegisterObservableProperty("Progress", GetProgress, _implementation);
+            registration.RegisterObservableProperty("LastError", GetLastError, _implementation);
         }
         
         ///  <summary>
@@ -82,6 +83,15 @@ namespace Tecan.VisionX.Sila2.SilaFluentStatusProvider
         protected virtual PropertyResponse<Tecan.Sila2.IntegerDto> GetProgress()
         {
             return new PropertyResponse<Tecan.Sila2.IntegerDto>(new Tecan.Sila2.IntegerDto(_implementation.Progress, _server));
+        }
+        
+        ///  <summary>
+        /// Gets the current value of the Last Error property
+        /// </summary>
+        /// <returns>The current value wrapped in a data transfer object</returns>
+        protected virtual PropertyResponse<Tecan.Sila2.StringDto> GetLastError()
+        {
+            return new PropertyResponse<Tecan.Sila2.StringDto>(new Tecan.Sila2.StringDto(_implementation.LastError, _server));
         }
         
         ///  <summary>
@@ -108,6 +118,10 @@ namespace Tecan.VisionX.Sila2.SilaFluentStatusProvider
             if ((propertyIdentifier == "tecan/fluent/SilaFluentStatusProvider/v1/Property/Progress"))
             {
                 return typeof(ISilaFluentStatusProvider).GetProperty("Progress");
+            }
+            if ((propertyIdentifier == "tecan/fluent/SilaFluentStatusProvider/v1/Property/LastError"))
+            {
+                return typeof(ISilaFluentStatusProvider).GetProperty("LastError");
             }
             return null;
         }
