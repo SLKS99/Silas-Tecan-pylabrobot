@@ -58,6 +58,11 @@ Now you can connect python by initializing a Fluent-Object in your script:
 fluent = Fluent("127.0.0.1", 50052)
 ```
 
+or, if you do not have SSL certificates you may choose to switch off secured connection (do not do this in production environment!):
+```python
+fluent = Fluent("127.0.0.1", 50052, insecure=True)
+```
+
 and start fluent from your script:
 ```python
 fluent.start_fluent()
