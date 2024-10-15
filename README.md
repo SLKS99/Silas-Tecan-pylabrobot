@@ -19,66 +19,6 @@ Clone the repository either with HTTPs or SSH (choose the appropriate link in th
 git clone https://gitlab.com/tecan/fluent-sila2-connector.git
 ```
 
-## Getting started
-
-### Creating a virtual environment:
-```bash
-pip install virtualenv
-virtualenv path\to\virtualenv
-```
-
-### Activate the virtual environment:
-```bash
-path\to\virtualenv\Scripts\activate
-```
-
-### With virtualenv activated:
-```bash
-pip install sila2
-```
-
-Next, navigate into the Python folder and type:
-```bash
-python setup.py install
-```
-
-If the setup is successful you will be able to use the python client in any python-script by just importing it:
-```python
-from tecan import Fluent
-```
-
-To start the server just install it via the windows installer (in the Binaries folder). Note: The installation will succeed in under 1 sec and without confirmation. Next, start the SiLAServer: 
-```cmd
-C:\Program Files (x86)\SilaFluentServerSetup\Files\SilaFluentServer.exe
-```
-
-Now you can connect python by initializing a Fluent-Object in your script:
-
-```python
-fluent = Fluent("127.0.0.1", 50052)
-```
-
-or, if you do not have SSL certificates you may choose to switch off secured connection (do not do this in production environment!):
-```python
-fluent = Fluent("127.0.0.1", 50052, insecure=True)
-```
-
-and start fluent from your script:
-```python
-fluent.start_fluent()
-```
-
-As an alternative to the above, we now also support discovery. This means, the following will also work:
-```python
-fluent = Fluent.discover(10)
-```
-
-To login with UMS you can add username and password like this:
-```python
-fluent.start_fluent(username=”abc”, password=”xyz”)
-```
-
-
 ## Issues and Bugs
 If you see an issue please feel free to file a bug on the project [list of issues](https://gitlab.com/tecan/fluent-sila2-connector/issues)
 
